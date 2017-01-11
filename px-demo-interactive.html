@@ -1,0 +1,64 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+<!-- Import style module -->
+<link rel="import" href="css/px-demo-styles.html">
+
+<!--
+Component container code for Predix UI demos.
+
+##### Usage
+
+    <px-demo-interactive>
+    </px-demo-interactive>
+
+@element px-demo-header
+@blurb Creates a header for Predix UI demo pages.
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-demo-interactive">
+  <template>
+    <style include="px-demo-styles"></style>
+
+    <section class="demo-background--interactive">
+      <!-- Tabs go above -->
+      <div class="[ u-ph++ u-pt++ ]">
+        <content select="px-demo-configs"></content>
+      </div>
+
+      <!-- Wraps around all interactive -->
+      <article class="[ flex ] [ u-ph++ u-pb++ ]">
+
+        <!-- The demo properties go in here -->
+        <div class="demo-properties-container u-ph+ u-pb+ u-mt+">
+          <content select="px-demo-props"></content>
+        </div>
+
+        <!-- The demo component and snippet go in here -->
+        <div class="demo-component-code-container u-mt+">
+          <div class="flex flex--col">
+            <div class="demo-component-container u-p+">
+              <content select="px-demo-component"></content>
+            </div>
+          </div>
+
+          <content select="px-demo-component-snippet"></content>
+        </div>
+
+      </article>
+    </section>
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-demo-interactive'
+  });
+</script>

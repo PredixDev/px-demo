@@ -1,0 +1,249 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-dropdown/px-dropdown.html" />
+
+<!-- Import style module -->
+<link rel="import" href="css/px-demo-styles.html">
+
+<!-- Common demo behaviors -->
+<link rel="import" href="px-demo-behaviors.html">
+
+<!--
+Creates inputs for configuration props.
+
+##### Usage
+
+        <px-demo-props></px-demo-props>
+
+@element px-demo-props
+@blurb Creates inputs for configuration props.
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-demo-props">
+  <template>
+    <style include="px-demo-styles"></style>
+
+    <template is="dom-if" if="{{_fields.length}}">
+      <p class="epsilon u-mb+">Properties</p>
+
+      <template is="dom-repeat" items="{{_fields}}">
+
+        <!-- INPUT: 'toggle'  -->
+        <template is="dom-if" if="{{_itIs(item.inputType, 'toggle')}}">
+          <div class="flex flex--justify u-mb-">
+            <div>{{_getFieldLabel(item)}}</div>
+            <div class="u-ml-">
+              <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" on-change="_handleToggleInput">
+              <label for$="toggle-{{item.prop}}" class="toggle__label toggle__label--small"></label>
+            </div>
+          </div>
+        </template>
+
+        <!-- INPUT: 'text'  -->
+        <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
+          <div class="u-mb-">
+            <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
+          </div>
+        </template>
+
+        <!-- INPUT: 'dropdown'  -->
+        <template is="dom-if" if="{{_itIs(item.inputType, 'dropdown')}}">
+          <div class="u-mb-">
+            <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+            <div style="width: 100%;">
+              <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{item.value::change}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
+                <px-dropdown-content
+                items="{{item.inputChoices}}">
+              </px-dropdown-content>
+            </px-dropdown>
+          </div>
+        </template>
+
+      </template>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-demo-props',
+
+    behaviors: [PxDemoBehaviors.manageProps],
+
+    properties: {
+      /**
+       * An object with keys describing the name of a possible input, the expected
+       * return value type, the choices, and the input to show.
+       *
+       * @property props
+       */
+      props: {
+        type: Object,
+        notify: true,
+        value: function(){ return {} }
+      },
+
+      /**
+       * The currently-chosen config. When this property is updated, any
+       * props defined in the config will be updated in the fields.
+       *
+       * @type {Object}
+       */
+      config: {
+        type: Object,
+        value: function(){ return {}; }
+      },
+
+      /**
+       * An array of field names to be mounted in the DOM.
+       *
+       * @type {Array}
+       */
+      _fields: {
+        type: Array,
+        value: function(){ return []; }
+      },
+
+      /**
+       * An index of `_fields` entries by `propName`.
+       */
+      _fieldsIndex: {
+        type: Object,
+        value: function(){ return {}; }
+      }
+    },
+
+    observers: ['_computeFields(props)', '_syncToField(props.*)'],
+
+    ready: function() {
+      this.applyPropDefaults();
+    },
+
+    /**
+     * Extracts all field names to iterate over in a `dom-repeat`.
+     *
+     * @return {Array}
+     */
+    _computeFields: function() {
+      this.debounce('prepare-fields', function(){
+        var props = this.props;
+        var propKeys = Object.keys(props);
+
+        if (propKeys.length) {
+          for (var i = 0; i < propKeys.length; i++) {
+            this.push('_fields', Object.assign({}, { prop: propKeys[i] }, props[propKeys[i]]));
+            this.set('_fieldsIndex.'+propKeys[i], '#'+i);
+          }
+        }
+      }, 200);
+    },
+
+    /**
+     * Convenience method for comparing two references in a dom-if template.
+     *
+     * @return {Boolean}
+     */
+    _itIs: function(it1, it2) {
+      return it1 === it2;
+    },
+
+    /**
+     * Returns the public name for the prop that should be shown to the user
+     *
+     * @param {String} propName - The key of the property in the `props` object
+     * @return {String}
+     */
+    _getFieldLabel: function(field) {
+      if (field.inputLabel) return field.inputLabel;
+
+      return this._formatInputLabel(field.prop);
+    },
+
+    /**
+     * Converts a camel-case string like 'isReallyNice' to a regular string
+     * like 'Is Really Nice'.
+     *
+     * @param {String} camelString
+     * @return {String}
+     */
+    _formatInputLabel: function(camelString) {
+      // First step converts 'isReallyNice' to 'is Really Nice'
+      var camelToWords = camelString.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1");
+      // Second step converts 'is Really Nice' to 'Is Really Nice'
+      return camelToWords.charAt(0).toUpperCase() + camelToWords.slice(1);
+    },
+
+    /**
+     * Binds a text input event to the prop.value it should change.
+     */
+    _handleTextInput: function(evt) {
+      this.debounce('handle-text-input' + evt.target.prop, function(){
+        this._syncToProp(evt.target.prop, evt.target.value);
+      }, 50);
+    },
+
+    /**
+     * Binds a toggle input event to the prop.value it should change.
+     */
+    _handleToggleInput: function(evt) {
+      this.debounce('handle-toggle-input' + evt.target.prop, function(){
+        this._syncToProp(evt.target.prop, evt.target.checked);
+      }, 50);
+    },
+
+    /**
+     * Binds a toggle input event to the prop.value it should change.
+     */
+    _handleDropdownInput: function(evt) {
+      this.debounce('handle-dropdown-input' + evt.target.prop, function(){
+        // @TODO: Bad abtraction that should be improved. The event handler
+        // placed on `px-dropdown` is triggered by child `px-dropdown-content`.
+        // To get the `prop` attribute from `px-dropdown` we need to crawl up
+        // the DOM tree twice. This is messy and could break if the internal
+        // structure of `px-dropdown` changes. :(
+        var pxDropdownActual = evt.target.parentElement.parentElement;
+        this._syncToProp(pxDropdownActual.prop, evt.detail.val);
+      }, 50);
+    },
+
+    /**
+     * Sync a value from a field to a prop.
+     *
+     * @param {String} propName - Name of prop, will also be its key in `props` object
+     * @param {Any} newVal - The updated value to set for the prop
+     */
+    _syncToProp: function(propName, newVal) {
+      this.set('props.' + propName + '.value', newVal);
+    },
+
+    /**
+     * Sync a value from a prop to a field.
+     *
+     * @param {Object} propChangeInfo - Object emitted by the complex change listener watching deep paths in `props`
+     */
+    _syncToField: function(propChangeInfo) {
+      if (propChangeInfo && (typeof propChangeInfo === 'object') && propChangeInfo.path && propChangeInfo.path.indexOf('.value') !== -1) {
+        this.debounce('sync-to-field' + propChangeInfo.path, function() {
+          // Get the name of the prop changed
+          var prop = propChangeInfo.path.replace('props.', '').replace('.value', '');
+          // Find the index of the prop in `_fields` array
+          var indexOfField = this.get('_fieldsIndex.' + prop);
+          // Pop the value
+          var fieldValPath = '_fields.' + indexOfField + '.value';
+          var fieldVal = this.get(fieldValPath);
+          // If an update is needed, make it
+          if ((typeof fieldVal !== 'undefined') && fieldVal !== propChangeInfo.value) {
+            this.set(fieldValPath, propChangeInfo.value);
+          }
+        }, 50);
+      }
+    },
+  });
+</script>

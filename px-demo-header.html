@@ -1,0 +1,76 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+<!-- Import style module -->
+<link rel="import" href="css/px-demo-styles.html">
+
+<!--
+Creates a header for Predix UI demo pages.
+
+##### Usage
+
+    <px-demo-header
+        module-name="px-calendar-picker"
+        description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or date range. The main use of this component is to be used in the px-range-panel.">
+    </px-demo-header>
+
+@element px-demo-header
+@blurb Creates a header for Predix UI demo pages.
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-demo-header">
+  <template>
+    <style include="px-demo-styles"></style>
+
+    <section class="demo-background--base">
+      <div class="demo-layout--center demo-u-pb+++ u-pt++ text--shadow">
+        <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/{{moduleName}}" target="_new">
+          <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
+        </a>
+        <h1 class="delta">{{moduleName}}</h1>
+        <div class="demo-text-width--max">
+          <p>{{description}}</p>
+        </div>
+        <div class="flex">
+          <img class="u-mr--" src="https://img.shields.io/travis/PredixDev/{{moduleName}}/master.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
+          <img class="u-mr--" src="https://img.shields.io/bower/v/{{moduleName}}.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
+          <img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/{{moduleName}}/master.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
+        </div>
+    	</div>
+    </section>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-demo-header',
+
+    properties: {
+      /**
+       * Name of the Predix UI module.
+       *
+       * @property moduleName
+       */
+      moduleName: {
+        type: String,
+        value: ''
+      },
+
+      /**
+       * Description of the Predix UI module.
+       *
+       * @property description
+       */
+      description: {
+        type: String,
+        value: ''
+      }
+    }
+  });
+</script>
