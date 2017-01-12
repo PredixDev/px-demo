@@ -58,7 +58,7 @@ Creates inputs for configuration props.
           <div class="u-mb-">
             <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
             <div style="width: 100%;">
-              <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{item.value::change}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
+              <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
                 <px-dropdown-content
                 items="{{item.inputChoices}}">
               </px-dropdown-content>
@@ -181,36 +181,43 @@ Creates inputs for configuration props.
     },
 
     /**
+     * Retrieves the value to show for the dropdown element. If the current `dropdownVal` is
+     * not defined or an empty string, sets the display value to "Select".
+     *
+     * @param {String} dropdownVal
+     * @return {String}
+     */
+    _getDropdownDisplayValue: function(dropdownVal) {
+      if (!dropdownVal || !dropdownVal.length) return "Select";
+      return dropdownVal;
+    },
+
+    /**
      * Binds a text input event to the prop.value it should change.
      */
     _handleTextInput: function(evt) {
-      this.debounce('handle-text-input' + evt.target.prop, function(){
-        this._syncToProp(evt.target.prop, evt.target.value);
-      }, 50);
+      this._syncToProp(evt.target.prop, evt.target.value);
     },
 
     /**
      * Binds a toggle input event to the prop.value it should change.
      */
     _handleToggleInput: function(evt) {
-      this.debounce('handle-toggle-input' + evt.target.prop, function(){
-        this._syncToProp(evt.target.prop, evt.target.checked);
-      }, 50);
+      this._syncToProp(evt.target.prop, evt.target.checked);
     },
 
     /**
      * Binds a toggle input event to the prop.value it should change.
      */
     _handleDropdownInput: function(evt) {
-      this.debounce('handle-dropdown-input' + evt.target.prop, function(){
-        // @TODO: Bad abtraction that should be improved. The event handler
-        // placed on `px-dropdown` is triggered by child `px-dropdown-content`.
-        // To get the `prop` attribute from `px-dropdown` we need to crawl up
-        // the DOM tree twice. This is messy and could break if the internal
-        // structure of `px-dropdown` changes. :(
-        var pxDropdownActual = evt.target.parentElement.parentElement;
-        this._syncToProp(pxDropdownActual.prop, evt.detail.val);
-      }, 50);
+      // @TODO: Bad abtraction that should be improved. The event handler
+      // placed on `px-dropdown` is triggered by child `px-dropdown-content`.
+      // To get the `prop` attribute from `px-dropdown` we need to crawl up
+      // the DOM tree twice. This is messy and could break if the internal
+      // structure of `px-dropdown` changes. :(
+      var pxDropdownActual = evt.path.filter(function(nodeEl){ return nodeEl.nodeName === "PX-DROPDOWN" })[0];
+      if (!pxDropdownActual) return;
+      this._syncToProp(pxDropdownActual.prop, evt.detail.val);
     },
 
     /**
