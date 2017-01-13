@@ -1,6 +1,6 @@
 v1.0.1
 ==================
-* updating bower
+* updating bower dependencies
 
 v1.0.0
 ==================
