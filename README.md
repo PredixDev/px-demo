@@ -28,12 +28,6 @@ Second, import the component to your application with the following tag in your 
 <link rel="import" href="/bower_components/px-demo/px-demo.html"/>
 ```
 
-Finally, use the component in your application:
-
-```
-Insert Your demo code here.
-```
-
 <br />
 <hr />
 
