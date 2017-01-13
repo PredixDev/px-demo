@@ -1,3 +1,7 @@
+v1.0.2
+==================
+* Update chosenConfig when userConfigs are populated
+
 v1.0.1
 ==================
 * updating bower dependencies
