@@ -33,7 +33,7 @@ configurable options.
 
     <template is="dom-if" if="_hasConfigs(configs)">
       <px-tab-set selected="{{_selectedTab}}" bare no-bottom-border>
-        <template is="dom-repeat" items="{{configs}}">
+        <template is="dom-repeat" items="{{_userConfigs}}">
           <px-tab>{{_findConfigName(item, index)}}</px-tab>
         </template>
       </px-tab-set>
@@ -61,6 +61,11 @@ configurable options.
        *     displayMode: 'day'
        *   }, ...]
        *
+       * On definition or update, copied to an internal representation of configs
+       * called `_userConfigs` that can then be mutated by the user. This
+       * representation is saved so users can return to the developer defined
+       * version of this configuration.
+       *
        * @property configs
        */
       configs: {
@@ -83,6 +88,10 @@ configurable options.
        * The `props` that the user can configure. When the `chosenConfig` is
        * updated, any values defined there will be applied to `props`
        *
+       * When any of the `props` values are changed, a new version of the config
+       * is saved so that when the user returns to this config, the options
+       * they selected are restored.
+       *
        * @property props
        */
       props: {
@@ -99,13 +108,43 @@ configurable options.
       _selectedTab: {
         type: Number,
         value: 0
+      },
+
+      /**
+       * An internal representation of the state of a particular configuration.
+       *
+       * @type {Object}
+       */
+      _userConfigs: {
+        type: Array,
+        value: function(){ return []; }
       }
     },
 
     observers: [
-      '_setChosenConfig(_selectedTab, configs, configs.*)',
-      '_updateProps(chosenConfig)'
+      '_setChosenConfig(_selectedTab)',
+      '_updateProps(chosenConfig)',
+      '_createUserConfigs(configs)',
+      '_updateUserConfigProps(props.*)'
     ],
+
+    /**
+     * Converts all developer-supplied `configs` and copies them to a `_userConfigs`
+     * representation that can be changed by the user.
+     *
+     * Whenever the user changes a prop with a config selected, the current state
+     * of the config is saved. If a user leaves the config and returns to it later,
+     * the config state will be restored.
+     */
+    _createUserConfigs: function() {
+      this.debounce('create-user-configs', function() {
+        var configs = this.configs;
+
+        for (var i = 0; i < configs.length; i++) {
+          this.push('_userConfigs', Object.assign({}, {}, configs[i]));
+        }
+      }, 200);
+    },
 
     /**
      * Returns the next index.
@@ -134,8 +173,9 @@ configurable options.
      *
      * @return {Object}
      */
-    _setChosenConfig: function(selected, configs) {
+    _setChosenConfig: function(selected) {
       this.debounce('set-chosen-config', function() {
+        var configs = this._userConfigs || [];
         if (typeof selected === 'undefined' || !configs.length) return {};
         this.set('chosenConfig', {});
         this.set('chosenConfig', configs[selected]);
@@ -184,6 +224,33 @@ configurable options.
      */
     _hasConfigs: function(configs) {
       return this.configs.length > 0;
+    },
+
+    /**
+     * Whenever the user changes a prop with a config selected, save the current
+     * state of the config. If a user leaves this config and returns to it later,
+     * the config state will be restored.
+     *
+     * @param {Object} propChangeInfo - Object emitted by the complex change listener watching deep paths in `props`
+     */
+    _updateUserConfigProps: function(propChangeInfo) {
+      if (propChangeInfo && (typeof propChangeInfo === 'object') && propChangeInfo.path && propChangeInfo.path.indexOf('.value') !== -1) {
+        this.debounce('update-user-config-props', function() {
+          // Get the prop name and value
+          var propName = propChangeInfo.path.replace('props.','').replace('.value','');
+          var propVal = propChangeInfo.value;
+
+          // Get the current `_userConfigs`
+          var configIndex = this.get('_selectedTab');
+          var configPropPath = '_userConfigs.' + configIndex + '.' + propName;
+          var configPropVal = this.get(configPropPath);
+
+          // Set the new value, if needed
+          if (configPropVal !== propVal) {
+            this.set(configPropPath, propVal);
+          }
+        }, 50);
+      }
     }
   });
 </script>
