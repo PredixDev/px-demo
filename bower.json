@@ -30,7 +30,8 @@
     "px-dropdown": "^2.2.3",
     "px-demo-snippet": "^0.6.16",
     "px-api-viewer": "^0.1.14",
-    "px-tabs": "~0.6.2"
+    "px-tabs": "~0.6.2",
+    "px-demo-design": "^1.0.3"
   },
   "devDependencies": {
     "px-forms-design": "^1.1.3",
