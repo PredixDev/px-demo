@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": [
     "px-demo.html"
   ],
@@ -26,16 +26,16 @@
   "dependencies": {
     "polymer": "^1.7.1",
     "px-theme": "^2.0.3",
-    "px-demo-doc-design": "^1.0.3"
+    "px-demo-doc-design": "^1.0.3",
+    "px-dropdown": "^2.2.3",
+    "px-demo-snippet": "^0.6.16",
+    "px-api-viewer": "^0.1.14",
+    "px-tabs": "~0.6.2"
   },
   "devDependencies": {
     "px-forms-design": "^1.1.3",
     "px-tables-design": "^1.1.5",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
     "px-polymer-font-awesome": "^1.1.1",
-    "px-tabs": "~0.6.2",
-    "px-api-viewer": "^0.1.14",
-    "px-demo-snippet": "^0.6.16",
     "px-list-inline-design": "^0.3.2",
     "px-toggle-design": "^1.1.4",
     "px-headings-design": "^0.3.3",
@@ -43,8 +43,8 @@
     "px-code-design": "^1.1.3",
     "px-list-bare-design": "^0.3.2",
     "px-meta-lists-design": "^0.4.1",
-    "px-dropdown": "^2.2.3",
     "px-starter-kit-design": "~0.7.2",
-    "px-calendar-picker": "^0.6.3"
+    "px-calendar-picker": "^0.6.3",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5"
   }
 }
