@@ -1,3 +1,7 @@
+v1.0.3
+==================
+* Updating to cool grays
+
 v1.0.2
 ==================
 * Update chosenConfig when userConfigs are populated
