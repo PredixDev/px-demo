@@ -49,7 +49,7 @@ Creates inputs for configuration props.
         <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
+            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
         </template>
 
@@ -152,6 +152,18 @@ Creates inputs for configuration props.
      */
     _itIs: function(it1, it2) {
       return it1 === it2;
+    },
+
+    /**
+     * Convenience method for comparing two references in a dom-if template.
+     *
+     * @return {Boolean}
+     */
+    _itIsTrue: function(it) {
+      if (typeof it === 'boolean') return it === true;
+      if (it === 'true') return true;
+      if (it === 'false') return false;
+      return;
     },
 
     /**

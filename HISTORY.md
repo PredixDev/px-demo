@@ -1,3 +1,7 @@
+v1.0.6
+==========================
+* added inputDisabled to props
+
 v1.0.5
 ==========================
 * .demo-component-container changed to overflow visible for datetime panels
