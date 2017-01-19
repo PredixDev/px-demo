@@ -1,3 +1,7 @@
+v1.1.0
+==========================
+* added an event that fires when the light dom is loaded on demo-component, which holds the component that is being demoed.
+
 v1.0.8
 ==========================
 * adding index-dark-theme.html
