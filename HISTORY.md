@@ -1,3 +1,7 @@
+v1.0.8
+==========================
+* adding index-dark-theme.html
+
 v1.0.7
 ==========================
 * loads theming links dynamically in the head of index.html
