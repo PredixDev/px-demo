@@ -60,7 +60,8 @@ Creates inputs for configuration props.
             <div style="width: 100%;">
               <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
                 <px-dropdown-content
-                items="{{item.inputChoices}}">
+                items="{{item.inputChoices}}"
+                prop="{{item.prop}}">
               </px-dropdown-content>
             </px-dropdown>
           </div>
@@ -222,14 +223,7 @@ Creates inputs for configuration props.
      * Binds a toggle input event to the prop.value it should change.
      */
     _handleDropdownInput: function(evt) {
-      // @TODO: Bad abtraction that should be improved. The event handler
-      // placed on `px-dropdown` is triggered by child `px-dropdown-content`.
-      // To get the `prop` attribute from `px-dropdown` we need to crawl up
-      // the DOM tree twice. This is messy and could break if the internal
-      // structure of `px-dropdown` changes. :(
-      var pxDropdownActual = evt.path.filter(function(nodeEl){ return nodeEl.nodeName === "PX-DROPDOWN" })[0];
-      if (!pxDropdownActual) return;
-      this._syncToProp(pxDropdownActual.prop, evt.detail.val);
+      this._syncToProp(evt.target.prop, evt.detail.val);
     },
 
     /**

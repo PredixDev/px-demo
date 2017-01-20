@@ -1,3 +1,7 @@
+v1.1.1
+==========================
+* Removes abstraction for toggle input, fixing a bug where Edge browser could not update props
+
 v1.1.0
 ==========================
 * added an event that fires when the light dom is loaded on demo-component, which holds the component that is being demoed.
