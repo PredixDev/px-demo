@@ -1,3 +1,7 @@
+1.1.4
+==========================
+* removed async from px-theme-styles import
+
 1.1.3
 ==========================
 * fixed typo in demo/index 
