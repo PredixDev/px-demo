@@ -33,7 +33,7 @@ Component container code for Predix UI demos.
       </div>
 
       <!-- Wraps around all interactive -->
-      <article class="demo-container-flex [ u-ph++ u-pb++ ]"> 
+      <article class="demo-container-flex [ u-ph++ u-pb++ ]">
 
         <!-- The demo properties go in here -->
         <div class="demo-properties-container u-ph+ u-pb+ u-mt+">
@@ -59,6 +59,24 @@ Component container code for Predix UI demos.
 
 <script>
   Polymer({
-    is: 'px-demo-interactive'
+    is: 'px-demo-interactive',
+    attached: function() {
+      //find the content tag associated with demo-component
+      var demoComponentContent = Polymer.dom(this.root).querySelector('content[select=px-demo-component]');
+      // and observe it, to find out when the light dom is loaded - once it's loaded, call the function that fires off a loaded event, making sure to bind the polymer component.
+      Polymer.dom(demoComponentContent).observeNodes(this._demoComponentLightDomLoaded.bind(this));
+    },
+    /**
+     * gets called when the light dom for demo-component is loaded, and fires
+     * an event.
+     */
+    _demoComponentLightDomLoaded: function() {
+      this.fire('px-demo-component-light-dom-loaded');
+    }
+    /**
+     * fired when the light DOM contgent has been loadedfor px-dom-component, which
+     * holds the component being demoed.
+     * @event px-demo-component-light-dom-loaded
+     */
   });
 </script>

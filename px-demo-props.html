@@ -49,7 +49,7 @@ Creates inputs for configuration props.
         <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" />
+            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
         </template>
 
@@ -59,7 +59,7 @@ Creates inputs for configuration props.
             <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
             <div style="width: 100%;">
               <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
-                <px-dropdown-content items="{{item.inputChoices}}"></px-dropdown-content>
+                <px-dropdown-content items="{{item.inputChoices}}" prop="{{item.prop}}"></px-dropdown-content>
               </px-dropdown>
             </div>
           </div>
@@ -165,6 +165,18 @@ Creates inputs for configuration props.
     },
 
     /**
+     * Convenience method for comparing two references in a dom-if template.
+     *
+     * @return {Boolean}
+     */
+    _itIsTrue: function(it) {
+      if (typeof it === 'boolean') return it === true;
+      if (it === 'true') return true;
+      if (it === 'false') return false;
+      return;
+    },
+
+    /**
      * Returns the public name for the prop that should be shown to the user
      *
      * @param {String} propName - The key of the property in the `props` object
@@ -220,14 +232,7 @@ Creates inputs for configuration props.
      * Binds a toggle input event to the prop.value it should change.
      */
     _handleDropdownInput: function(evt) {
-      // @TODO: Bad abtraction that should be improved. The event handler
-      // placed on `px-dropdown` is triggered by child `px-dropdown-content`.
-      // To get the `prop` attribute from `px-dropdown` we need to crawl up
-      // the DOM tree twice. This is messy and could break if the internal
-      // structure of `px-dropdown` changes. :(
-      var pxDropdownActual = evt.path.filter(function(nodeEl){ return nodeEl.nodeName === "PX-DROPDOWN" })[0];
-      if (!pxDropdownActual) return;
-      this._syncToProp(pxDropdownActual.prop, evt.detail.val);
+      this._syncToProp(evt.target.prop, evt.detail.val);
     },
 
     /**

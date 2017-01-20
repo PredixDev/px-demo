@@ -11,12 +11,6 @@
 <link rel="import" href="../px-demo-interactive.html" />
 <link rel="import" href="../px-demo-component-snippet.html" />
 
-<!-- Light theme -->
-<link rel="import" href="../../px-theme/px-theme-styles.html">
-<!-- Dark theme -->
-<!-- <link rel="import" href="../../px-dark-theme/px-theme-styles.html"> -->
-<!-- <link rel="import" href="../../px-dark-demo-theme/px-dark-demo-theme-styles.html"> -->
-
 <!-- Imports for this componnent -->
 <link rel="import" href="../css/px-demo-styles.html" />
 <link rel="import" href="../../px-calendar-picker/px-calendar-picker.html" />
@@ -24,11 +18,12 @@
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
-    <!-- Light theme -->
+    <!-- Some of these theme files will fail to load. That is OK. That's how
+         we expose dynamic theming. -->
     <style include="px-theme-styles" is="custom-style"></style>
-    <!-- Dark theme -->
-    <!--<style include="px-dark-demo-theme-styles" is="custom-style"></style>-->
+    <style include="px-dark-theme-styles" is="custom-style"></style>
+    <style include="px-dark-demo-theme-styles" is="custom-style"></style>
+    <style include="px-demo-styles" is="custom-style"></style>
 
     <!-- Header -->
     <px-demo-header

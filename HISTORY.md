@@ -1,3 +1,27 @@
+v1.1.1
+==========================
+* Removes abstraction for toggle input, fixing a bug where Edge browser could not update props
+
+v1.1.0
+==========================
+* added an event that fires when the light dom is loaded on demo-component, which holds the component that is being demoed.
+
+v1.0.8
+==========================
+* adding index-dark-theme.html
+
+v1.0.7
+==========================
+* loads theming links dynamically in the head of index.html
+
+v1.0.6
+==========================
+* added inputDisabled to props
+
+v1.0.5
+==========================
+* .demo-component-container changed to overflow visible for datetime panels
+
 v1.0.4
 ==================
 * added demo-container-flex for mobile
