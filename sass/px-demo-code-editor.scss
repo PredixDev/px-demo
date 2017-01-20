@@ -46,43 +46,57 @@ $inuit-enable-btn--small : true;
 // Component
 @import "px-demo-design/_component.demo.scss";
 
-px-demo-code-editor([enabled]) {
-  color: red;
-}
-// Demo code editor sub-component
-.demo-code-editor {
-  z-index: 1001;
+:host {
+  display: none;
+  visibility: hidden;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 5% auto;
-
-  width: 50em;
-  max-width: 90%;
-
-  // display: flex;
+  px-code-editor {
+    display: none;
+    visibility: hidden;
+  }
 }
-.demo-code-editor__wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+:host([enabled]) {
+  display: initial;
+  visibility: visible;
 
-  // display: flex;
-  background-color: white;
-  padding: $inuit-base-spacing-unit--large;
-}
-.demo-code-editor__header > h4 {
-  margin-top: 0;
-}
-.demo-code-editor__body {
-  // display: block;
-  // width: 100%;
-  // height: 100%;
+  px-code-editor {
+    display: inherit;
+    visibility: visible;
+  }
+
+  // Demo code editor sub-component
+  .demo-code-editor {
+    z-index: 1001;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 5% auto;
+
+    width: 60em;
+    max-width: 90%;
+  }
+  .demo-code-editor__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: white;
+    padding: $inuit-base-spacing-unit--large;
+    max-height: 800px;
+  }
+  .demo-code-editor__header > h4 {
+    margin-top: 0;
+  }
+  .demo-code-editor__body {
+    // display: block;
+    // width: 100%;
+    // height: 100%;
+  }
 }
 
 // Trumps

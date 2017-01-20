@@ -1,0 +1,191 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-code-editor/px-code-editor.html">
+<link rel="import" href="../px-code-editor/px-code-editor-converter.html">
+<link rel="import" href="../px-overlay/px-overlay.html">
+
+<!-- Import style module -->
+<link rel="import" href="css/px-demo-styles.html">
+<link rel="import" href="css/px-demo-code-editor-styles.html">
+
+<!--
+Wraps around `px-code-editor` to provide a code editor instance that can be
+used to edit complex props.
+
+##### Usage
+
+    <px-demo-code-editor></px-demo-code-editor>
+
+@element px-demo-code-editor
+@blurb Provides a code editor instance to edit complex props.
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-demo-code-editor">
+  <template>
+    <style include="px-demo-styles"></style>
+    <style include="px-demo-code-editor-styles"></style>
+
+    <!-- Code converter instance -->
+    <px-code-editor-converter id="converter" enable-eval></px-code-editor-converter>
+
+    <div class="demo-code-editor [ flex flex--col ]">
+      <div class="demo-code-editor__wrapper [ flex__item flex flex--col ]">
+        <div class="demo-code-editor__header">
+          <h4>{{title}}</h4>
+        </div>
+        <div class="demo-code-editor__body [ flex__item ]">
+          <px-code-editor
+              id="codeEditor"
+              disable-linter
+              enable-beautify
+              enable-save-to-update
+              content="var foo = 'bar';">
+          </px-code-editor>
+        </div>
+      </div>
+    </div>
+    <px-overlay type="dark"></px-overlay>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-demo-code-editor',
+
+    properties: {
+
+      /**
+       * Makes the editor instance visible to the user.
+       *
+       * @type {Boolean}
+       * @default false
+       */
+      enabled: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+
+      /**
+       * The title to show over the top of the editor.
+       *
+       * @type {String}
+       */
+      title: {
+        type: String,
+        value: 'Property Editor: Dynamic Menu Config'
+      }
+    },
+
+    listeners: {
+      'px-code-editor-reset-action' : '_handleEditorReset',
+      'px-code-editor-save-action' : '_handleEditorSave',
+    },
+
+    attached: function() {
+      this.listen(document, 'px-demo-props-code-edit-request', '_handleEditRequest');
+    },
+
+    detached: function() {
+      this.unlisten(document, 'px-demo-props-code-edit-request', '_handleEditRequest');
+    },
+
+    /**
+     * When another element requests an editor instance, configure the instance
+     * and make it visible.
+     */
+    _handleEditRequest: function(evt) {
+      // Set the necessary local properties
+      this.set('title', evt.detail.editorTitle);
+
+      // Determine what kind of request to send to the converter
+      var conversionType;
+      if (evt.detail.editorType === 'code:JSON') conversionType = 'simpleJSON';
+      if (evt.detail.editorType === 'code:JavaScriptObject') conversionType = 'complexRawObject';
+      if (evt.detail.editorType === 'code:JavaScriptObject' && Array.isArray(evt.detail.code)) conversionType = 'complexRawArray';
+
+      if (!conversionType) return;
+
+      // Fire the event the converter will use to convert the code
+      this.fire('px-code-editor-converter-convert-to-string', {
+        source: evt.detail.code,
+        type: conversionType,
+        done: function(err, codeAsStr) {
+          var editor = this.$.codeEditor;
+          if (editor) {
+            this.$.codeEditor.set('content', codeAsStr);
+          }
+        }.bind(this)
+      });
+
+      // Make the editor visible
+      this.set('enabled', true);
+
+      // Save the `evt.detail.done` function for later use
+      this._currentEditorDoneCallback = null;
+      if (typeof evt.detail.done === 'function') {
+        this._currentEditorDoneCallback = evt.detail.done;
+      }
+    },
+
+    /**
+     * Searches a stringified constructor function for the native type and returns
+     * it as a simple string.
+     *
+     * @example
+     *
+     * var typeOf = Object;
+     * var typeOfConstructor = typeof.toString();
+     * _findType(typeOfConstructor); // => 'Object'
+     *
+     * @param {String} constructorStr - Stringified native constructor function
+     * @return {String}
+     */
+    _findType: function(constructorStr) {
+      var regex = /^function\s\b([a-zA-Z]+)\(\)/;
+      return regex.exec(constructorStr)[1] || undefined;
+    },
+
+    /**
+     * Set the document overflow to hidden when the code editor is enabled to
+     * lock the viewport to one position.
+     */
+    _toggleScrollLock: function() {
+      document.body.style.overflow = (document.body.style.overflow === "hidden") ? "auto" : "hidden";
+      document.documentElement.style.overflow = (document.documentElement.style.overflow === "hidden") ? "auto" : "hidden";
+    },
+
+    /**
+     * When the reset button is tapped on the editor instance, hide the editor.
+     */
+    _handleEditorReset: function(evt) {
+      var status = this.get('enabled');
+      if (status) {
+        this.set('enabled', false);
+      }
+    },
+
+    /**
+     * When the save button is tapped, return the new code to the node that
+     * originally requested an editor, then hide the editor.
+     */
+    _handleEditorSave: function(evt) {
+      if (this._currentEditorDoneCallback && typeof this._currentEditorDoneCallback === 'function' && evt.detail && evt.detail.content) {
+        // Fire the event the converter will use to convert back to code
+        this.fire('px-code-editor-converter-convert-from-string', {
+          source: evt.detail.content,
+          done: function(err, strAsCode) {
+            this._currentEditorDoneCallback(null, strAsCode);
+            this.set('enabled', false);
+          }.bind(this)
+        });
+      }
+    }
+  });
+</script>

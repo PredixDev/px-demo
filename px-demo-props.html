@@ -49,7 +49,7 @@ Creates inputs for configuration props.
         <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
+            <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
         </template>
 
@@ -57,7 +57,7 @@ Creates inputs for configuration props.
         <template is="dom-if" if="{{_itIs(item.inputType, 'dropdown')}}">
           <div class="u-mb-">
             <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <div style="width: 100%;">
+            <div style="width: 100%;" class="u-mb--">
               <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
                 <px-dropdown-content items="{{item.inputChoices}}" prop="{{item.prop}}"></px-dropdown-content>
               </px-dropdown>
@@ -66,12 +66,12 @@ Creates inputs for configuration props.
         </template>
 
         <!-- INPUT: 'javascriptCode'  -->
-        <template is="dom-if" if="{{_itIs(item.inputType, 'javascriptCode')}}">
+        <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'code:JavaScriptObject', 'code:JSON')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <div class="form-field input-group">
-              <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{...}" prop="{{item.prop}}" on-input="_editComplexJSON" disabled />
-              <button class="btn input-group__addon" type="button">Edit</button>
+            <div class="flex flex--row">
+              <input id="text-{{item.prop}}" class="text-input flex__item u-mb--" type="text" placeholder="{{item.inputPlaceholder}}" value="{...}" prop="{{item.prop}}" on-input="_editComplexJSON" disabled />
+              <button class="btn u-ml-" type="button" prop="{{item.prop}}" input-type="{{item.inputType}}" on-tap="_handleCodeEditButton">Edit</button>
             </div>
           </div>
         </template>
@@ -165,7 +165,25 @@ Creates inputs for configuration props.
     },
 
     /**
-     * Convenience method for comparing two references in a dom-if template.
+     * Convenience method for checking if a references in a dom-if template exists
+     * in an array.
+     *
+     * @return {Boolean}
+     */
+    _itIsOneOf: function(it) {
+      // Slice off the end of args to check if any of them equal `it`
+      var shouldBeOneOf = Array.prototype.slice.call(arguments, 1);
+      // Iterate over args to see if `it` is equal to one of them
+      var itIsInArray = false;
+      var len = (shouldBeOneOf && Array.isArray(shouldBeOneOf)) ? shouldBeOneOf.length : 0;
+      for (var i = 0; i < len; i++) {
+        if (shouldBeOneOf[i] === it) itIsInArray = true;
+      }
+      return itIsInArray;
+    },
+
+    /**
+     * Convenience method for checking if a reference in a dom-if is true.
      *
      * @return {Boolean}
      */
@@ -179,7 +197,7 @@ Creates inputs for configuration props.
     /**
      * Returns the public name for the prop that should be shown to the user
      *
-     * @param {String} propName - The key of the property in the `props` object
+     * @param {String} field - The key of the property in the `props` object
      * @return {String}
      */
     _getFieldLabel: function(field) {
@@ -233,6 +251,30 @@ Creates inputs for configuration props.
      */
     _handleDropdownInput: function(evt) {
       this._syncToProp(evt.target.prop, evt.detail.val);
+    },
+
+    /**
+     * Binds to a click on a code edit button.
+     */
+    _handleCodeEditButton: function(evt) {
+      var prop = this.get('props.' + evt.target.prop);
+      if (!prop) return;
+      var propType = prop.type;
+      var propVal = prop.value;
+      var propFriendlyName = this._formatInputLabel(prop.inputType || evt.target.prop);
+      if (propVal) {
+        this.fire('px-demo-props-code-edit-request', {
+          code: propVal,
+          expectedReturnType: propType,
+          editorType: evt.target.inputType,
+          editorTitle: "Property Editor: " + propFriendlyName,
+          done: function(err, newContent) {
+            if (newContent) {
+              this._syncToProp(evt.target.prop, newContent);
+            }
+          }.bind(this)
+        });
+      }
     },
 
     /**
