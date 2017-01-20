@@ -1,3 +1,7 @@
+1.1.3
+==========================
+* fixed typo in demo/index 
+
 1.1.2
 ==========================
 * Moved theming includes into index & index-dark-theme
