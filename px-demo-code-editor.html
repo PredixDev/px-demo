@@ -7,6 +7,7 @@
 <link rel="import" href="../px-code-editor/px-code-editor.html">
 <link rel="import" href="../px-code-editor/px-code-editor-converter.html">
 <link rel="import" href="../px-overlay/px-overlay.html">
+<link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
 
 <!-- Import style module -->
 <link rel="import" href="css/px-demo-styles.html">
@@ -30,6 +31,11 @@ used to edit complex props.
   <template>
     <style include="px-demo-styles"></style>
     <style include="px-demo-code-editor-styles"></style>
+
+    <!-- Bind to `esc` keypress on window to dismiss active editor -->
+    <template is="dom-if" if="[[enabled]]">
+      <iron-a11y-keys target="[[_escapeTargetNode]]" keys="esc" on-keys-pressed="_handleEscKeypress"></iron-a11y-keys>
+    </template>
 
     <!-- Code converter instance -->
     <px-code-editor-converter id="converter" enable-eval></px-code-editor-converter>
@@ -69,7 +75,8 @@ used to edit complex props.
       enabled: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        observer: '_lockScrolling'
       },
 
       /**
@@ -80,6 +87,18 @@ used to edit complex props.
       title: {
         type: String,
         value: 'Property Editor: Dynamic Menu Config'
+      },
+
+      /**
+       * Returns a reference to `document` to bind to for identifying and
+       * handling an escape keypress.
+       *
+       * @type {String}
+       */
+      _escapeTargetNode: {
+        value: function() {
+          return document.querySelector('body');
+        }
       }
     },
 
@@ -153,12 +172,23 @@ used to edit complex props.
     },
 
     /**
-     * Set the document overflow to hidden when the code editor is enabled to
-     * lock the viewport to one position.
+     * When the status of `enabled` changes, attempt to lock or unlock scrolling
+     * on the document.
+     *
+     * @param {Boolean} isEnabled
      */
-    _toggleScrollLock: function() {
-      document.body.style.overflow = (document.body.style.overflow === "hidden") ? "auto" : "hidden";
-      document.documentElement.style.overflow = (document.documentElement.style.overflow === "hidden") ? "auto" : "hidden";
+    _lockScrolling: function(isEnabled) {
+      debugger;
+      // Lock scrolling
+      if (isEnabled && isEnabled === true) {
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+      }
+      // Unlock scrolling
+      if (isEnabled === false) {
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+      }
     },
 
     /**
@@ -185,6 +215,17 @@ used to edit complex props.
             this.set('enabled', false);
           }.bind(this)
         });
+      }
+    },
+
+    /**
+     * When the user presses the escape key while the editor instance is enabled,
+     * try to hide the editor.
+     */
+    _handleEscKeypress: function() {
+      var status = this.get('enabled');
+      if (status) {
+        this.set('enabled', false);
       }
     }
   });

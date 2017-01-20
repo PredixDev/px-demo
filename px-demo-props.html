@@ -261,7 +261,7 @@ Creates inputs for configuration props.
       if (!prop) return;
       var propType = prop.type;
       var propVal = prop.value;
-      var propFriendlyName = this._formatInputLabel(prop.inputType || evt.target.prop);
+      var propFriendlyName = this._formatInputLabel(prop.inputLabel || evt.target.prop);
       if (propVal) {
         this.fire('px-demo-props-code-edit-request', {
           code: propVal,
