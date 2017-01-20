@@ -1,3 +1,7 @@
+1.1.2
+==========================
+* Moved theming includes into index & index-dark-theme
+
 v1.1.1
 ==========================
 * Removes abstraction for toggle input, fixing a bug where Edge browser could not update props
