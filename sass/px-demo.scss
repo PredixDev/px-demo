@@ -38,6 +38,11 @@ $inuit-enable-input--regular : true;
 $inuit-enable-list-inline--delimited : true;
 @import "px-list-inline-design/_objects.list-inline.scss";
 
+$inuit-enable-btn--small : true;
+@import "px-buttons-design/_objects.buttons.scss";
+
+@import "px-input-group-design/_objects.input-group.scss";
+
 // Component
 @import "px-demo-design/_component.demo.scss";
 
@@ -49,7 +54,7 @@ $inuit-enable-margins--large : true;
 $inuit-enable-margins--huge : true;
 $inuit-enable-paddings : true;
 $inuit-enable-paddings--tiny : true;
-$inuit-enable-paddings--small : true;  
+$inuit-enable-paddings--small : true;
 $inuit-enable-paddings--large : true;
 $inuit-enable-paddings--huge : true;
 @import "px-spacing-design/_trumps.spacing.scss";

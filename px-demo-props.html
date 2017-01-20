@@ -49,7 +49,7 @@ Creates inputs for configuration props.
         <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
+            <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" />
           </div>
         </template>
 
@@ -59,10 +59,20 @@ Creates inputs for configuration props.
             <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
             <div style="width: 100%;">
               <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
-                <px-dropdown-content
-                items="{{item.inputChoices}}">
-              </px-dropdown-content>
-            </px-dropdown>
+                <px-dropdown-content items="{{item.inputChoices}}"></px-dropdown-content>
+              </px-dropdown>
+            </div>
+          </div>
+        </template>
+
+        <!-- INPUT: 'javascriptCode'  -->
+        <template is="dom-if" if="{{_itIs(item.inputType, 'javascriptCode')}}">
+          <div class="u-mb-">
+            <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+            <div class="form-field input-group">
+              <input id="text-{{item.prop}}" class="text-input" type="text" placeholder="{{item.inputPlaceholder}}" value="{...}" prop="{{item.prop}}" on-input="_editComplexJSON" disabled />
+              <button class="btn input-group__addon" type="button">Edit</button>
+            </div>
           </div>
         </template>
 
