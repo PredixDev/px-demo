@@ -18,11 +18,6 @@
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
   <template>
-    <!-- Some of these theme files will fail to load. That is OK. That's how
-         we expose dynamic theming. -->
-    <style include="px-theme-styles" is="custom-style"></style>
-    <style include="px-dark-theme-styles" is="custom-style"></style>
-    <style include="px-dark-demo-theme-styles" is="custom-style"></style>
     <style include="px-demo-styles" is="custom-style"></style>
 
     <!-- Header -->
@@ -34,7 +29,7 @@
     <!-- Interactive -->
     <px-demo-interactive>
       <!-- Configs -->
-      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{consenConfig}}"></px-demo-configs>
+      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
 
       <!-- Props -->
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>

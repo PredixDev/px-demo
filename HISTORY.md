@@ -1,3 +1,19 @@
+1.1.5
+==========================
+* Fix double-quote-string bug that caused px-demo-snippet to fail silently
+
+1.1.4
+==========================
+* removed async from px-theme-styles import
+
+1.1.3
+==========================
+* fixed typo in demo/index 
+
+1.1.2
+==========================
+* Moved theming includes into index & index-dark-theme
+
 v1.1.1
 ==========================
 * Removes abstraction for toggle input, fixing a bug where Edge browser could not update props
