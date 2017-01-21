@@ -1,3 +1,7 @@
+1.1.5
+==========================
+* Fix double-quote-string bug that caused px-demo-snippet to fail silently
+
 1.1.4
 ==========================
 * removed async from px-theme-styles import
