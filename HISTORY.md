@@ -1,3 +1,7 @@
+1.2.1
+==========================
+* Remove debugger that should not have been checked in
+
 1.2.0
 ==========================
 * Add `px-demo-code-editor`, which allows for editing complex configuration objects
