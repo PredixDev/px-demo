@@ -39,10 +39,13 @@ Creates inputs for configuration props.
           <div class="flex flex--justify u-mb-">
             <div>{{_getFieldLabel(item)}}</div>
             <div class="u-ml-">
-              <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" on-change="_handleToggleInput">
+              <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" on-change="_handleToggleInput" disabled$="{{_itIsTrue(item.inputDisabled)}}">
               <label for$="toggle-{{item.prop}}" class="toggle__label toggle__label--small"></label>
             </div>
           </div>
+          <template is="dom-if" if="{{item.inputHelpText}}">
+            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+          </template>
         </template>
 
         <!-- INPUT: 'text'  -->
@@ -51,6 +54,9 @@ Creates inputs for configuration props.
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
             <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
+          <template is="dom-if" if="{{item.inputHelpText}}">
+            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+          </template>
         </template>
 
         <!-- INPUT: 'dropdown'  -->
@@ -74,6 +80,9 @@ Creates inputs for configuration props.
               <button class="btn u-ml-" type="button" prop="{{item.prop}}" input-type="{{item.inputType}}" on-tap="_handleCodeEditButton">Edit</button>
             </div>
           </div>
+          <template is="dom-if" if="{{item.inputHelpText}}">
+            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+          </template>
         </template>
 
       </template>

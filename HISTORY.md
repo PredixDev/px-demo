@@ -1,3 +1,8 @@
+1.1.6
+==========================
+* Add ability to pass `inputHelperText` to describe an input
+* Add `disabled` to the toggle input type
+
 1.1.5
 ==========================
 * Fix double-quote-string bug that caused px-demo-snippet to fail silently
