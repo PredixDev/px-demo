@@ -69,6 +69,9 @@ Creates inputs for configuration props.
               </px-dropdown>
             </div>
           </div>
+          <template is="dom-if" if="{{item.inputHelpText}}">
+            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+          </template>
         </template>
 
         <!-- INPUT: 'javascriptCode'  -->

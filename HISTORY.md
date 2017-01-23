@@ -1,3 +1,7 @@
+1.2.0
+==========================
+* Add `px-demo-code-editor`, which allows for editing complex configuration objects
+
 1.1.6
 ==========================
 * Add ability to pass `inputHelperText` to describe an input
