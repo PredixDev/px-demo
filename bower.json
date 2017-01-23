@@ -32,7 +32,8 @@
     "px-tabs": "~0.6.2",
     "px-demo-design": "^1.0.3",
     "px-overlay": "^0.4.2",
-    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.6"
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.6",
+    "px-code-editor": "^1.0.0"
   },
   "devDependencies": {
     "px-forms-design": "^1.1.3",
