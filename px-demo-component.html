@@ -1,0 +1,78 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+<!-- Import style module -->
+<link rel="import" href="css/px-demo-styles.html">
+
+<!--
+allows for sub component restamp if needed
+
+##### Usage
+
+        <px-demo-component></px-demo-component>
+
+@element px-demo-component
+@blurb allows for sub component restamp if needed
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-demo-component">
+  <template>
+    <style include="px-demo-styles"></style>
+    <template is="dom-if" if="{{_willRestamp}}" restamp>
+      <content></content>
+    </template>
+    <template is="dom-if" if="{{!restamp}}">
+      <content></content>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-demo-component',
+
+    properties: {
+      /**
+       * An object with keys describing the name of a possible input, the expected
+       * return value type, the choices, and the input to show.
+       *
+       * @property props
+       */
+      props: {
+        type: Object,
+        value: function(){ return {}; }
+      },
+      restamp: {
+        type: Boolean,
+        value: false,
+        observer: '_handleRestampSet'
+      },
+      _willRestamp: {
+        type: Boolean,
+        value: false
+      }
+    },
+    observers: ['_handlePropUpdate(props.*)'],
+    _handleRestampSet: function(newVal) {
+      if (newVal) {
+        this.set('_willRestamp', true);
+      }
+    },
+    _handlePropUpdate : function(propChangeInfo) {
+      if (propChangeInfo && (typeof propChangeInfo === 'object') && propChangeInfo.path && propChangeInfo.path.indexOf('.value') !== -1 && this.restamp) {
+        this.debounce('handle-prop-update' + propChangeInfo.path, function() {
+          this.set('_willRestamp', false);
+          this.async(function(){
+            this.set('_willRestamp', true);
+          }, 1);
+        }, 50);
+      }
+    }
+  });
+</script>
