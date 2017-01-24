@@ -1,3 +1,7 @@
+1.2.4
+==========================
+* Added type equal number for input fields
+
 1.2.3
 ==========================
 * Added buttons and inputs groups to bower and sass

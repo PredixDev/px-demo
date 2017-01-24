@@ -49,10 +49,10 @@ Creates inputs for configuration props.
         </template>
 
         <!-- INPUT: 'text'  -->
-        <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
+        <template is="dom-if" if="{{_itIs(item.inputType, 'text') || _itIs(item.inputType, 'number')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
+            <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
           <template is="dom-if" if="{{item.inputHelpText}}">
             <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
