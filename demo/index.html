@@ -35,7 +35,7 @@
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component>
+      <px-demo-component class="flex">
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
           <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>

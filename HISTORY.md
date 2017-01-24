@@ -1,3 +1,7 @@
+1.2.2
+==========================
+* Flex the demo container to be the full height for props
+
 1.2.1
 ==========================
 * Remove debugger that should not have been checked in

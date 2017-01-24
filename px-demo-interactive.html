@@ -40,15 +40,15 @@ Component container code for Predix UI demos.
       <article class="demo-container-flex [ u-ph++ u-pb++ ]">
 
         <!-- The demo properties go in here -->
-        <div class="demo-properties-container u-ph+ u-pb+ u-mt+">
+        <div class="flex demo-properties-container u-ph+ u-pb+ u-mt+">
           <content select="px-demo-props"></content>
         </div>
 
         <!-- The demo component and snippet go in here -->
-        <div class="demo-component-code-container u-mt+">
-          <div class="flex flex--col">
-            <div class="demo-component-container u-p+">
-              <content select="px-demo-component"></content>
+        <div class="flex flex--col demo-component-code-container u-mt+">
+          <div class="flex__item flex">
+            <div class="flex__item flex flex--col demo-component-container u-p+">
+              <content select="px-demo-component" class="flex"></content>
             </div>
           </div>
 
