@@ -1,3 +1,7 @@
+1.2.3
+==========================
+* Added buttons and inputs groups to bower and sass
+
 1.2.2
 ==========================
 * Flex the demo container to be the full height for props
