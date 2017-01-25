@@ -49,10 +49,10 @@ Creates inputs for configuration props.
         </template>
 
         <!-- INPUT: 'text'  -->
-        <template is="dom-if" if="{{_itIsTextorNumber(item.inputType)}}">
+        <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'text', 'number')}}">
           <div class="u-mb-">
             <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-            <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{item.inputPlaceholder}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value::change}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
+            <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
           <template is="dom-if" if="{{item.inputHelpText}}">
             <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
@@ -190,18 +190,6 @@ Creates inputs for configuration props.
       return it1 === it2;
     },
 
-    
-    /**
-     * Convenience method for checking if the inputType is 'number' or 'text
-     *
-     * @return {Boolean}
-     */
-    _itIsTextorNumber: function(it) {
-      if (it === 'text') return true;
-      if (it === 'number') return true;
-      return;
-    },
-
     /**
      * Convenience method for checking if a references in a dom-if template exists
      * in an array.
@@ -242,6 +230,17 @@ Creates inputs for configuration props.
       if (field.inputLabel) return field.inputLabel;
 
       return this._formatInputLabel(field.prop);
+    },
+
+    /**
+     * Returns the `field.inputPlaceholder` or an empty string if placeholder
+     * is not defined.
+     *
+     * @param {Object} field
+     * @return {String}
+     */
+    _getFieldPlaceholder: function(field) {
+      return field.inputPlaceholder || '';
     },
 
     /**
