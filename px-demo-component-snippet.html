@@ -98,23 +98,30 @@ Wraps around `px-demo-snippet` to show code sample.
      *
      * @return {Object}
      */
-    _assignShallowProps: function(props) {
-      if (props && (typeof props === 'object') && Object.keys(props).length) {
-        var propKeys = Object.keys(props);
-        var shallow = {};
+     _assignShallowProps: function(props) {
+       if (props && (typeof props === 'object') && Object.keys(props).length) {
+         var propKeys = Object.keys(props);
+         var shallow = {};
 
-        for (var i = 0; i < propKeys.length; i++) {
-          // Don't check the property directly because it might be a boolean value, check its existence on the object
-          var val = props[propKeys[i]].hasOwnProperty('value') ? props[propKeys[i]].value : "";
-          // @TODO: px-demo-snippet silently fails if it gets a string for an attribute with double quotes.
-          // For now, we clean them out manually. Future improvement is to fix this bug in px-demo-snippet.
-          val = ((typeof val === 'string') && val.indexOf('"') !== -1) ? val.replace(/\"/g, "'") : val;
-          shallow[propKeys[i]] = val;
-        }
+         for (var i = 0; i < propKeys.length; i++) {
+           // Don't check the property directly because it might be a boolean value, check its existence on the object
+           var val = props[propKeys[i]].hasOwnProperty('value') ? props[propKeys[i]].value : "";
+           // @TODO: px-demo-snippet silently fails if it gets a string for an attribute with double quotes.
+           // For now, we clean them out manually. Future improvement is to fix this bug in px-demo-snippet.
+           if (typeof val === 'string') {
+             // Replace double quotes on the outside with single quotes. Example:
+             // In: <tag foo="bar" array="['key':'val']"></tag>
+             // Out: <tag foo='bar' array='["key":"val"]'></tag>
+             val = val.replace(/([a-zA-Z]+=)"([^"]*)"/g, function(fullMatch, attrName, attrVal) {
+               return attrName + "'" + attrVal.replace(/\'/g, '"') + "'";
+             });
+           }
+           shallow[propKeys[i]] = val;
+         }
 
-        this.set('_shallowProps', {});
-        this.set('_shallowProps', shallow);
-      }
-    }
+         this.set('_shallowProps', {});
+         this.set('_shallowProps', shallow);
+       }
+     }
   });
 </script>

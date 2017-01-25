@@ -1,3 +1,7 @@
+1.2.5
+==========================
+* Fix single/double quote replacement in px-demo-component-snippet
+
 1.2.4
 ==========================
 * Added type equal number for input fields
@@ -33,7 +37,7 @@
 
 1.1.3
 ==========================
-* fixed typo in demo/index 
+* fixed typo in demo/index
 
 1.1.2
 ==========================
