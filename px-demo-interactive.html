@@ -40,7 +40,7 @@ Component container code for Predix UI demos.
       <article class="demo-container-flex [ u-ph++ u-pb++ ]">
 
         <!-- The demo properties go in here -->
-        <div class="flex demo-properties-container u-ph+ u-pb+ u-mt+">
+        <div class="flex demo-properties-container u-ph+ u-pb+ u-mt+" id="propsContainer">
           <content select="px-demo-props"></content>
         </div>
 
@@ -64,6 +64,47 @@ Component container code for Predix UI demos.
 <script>
   Polymer({
     is: 'px-demo-interactive',
+
+    properties: {
+      /**
+       * If true, make sure the props container is shown. If false, hide it.
+       *
+       * @type {Object}
+       */
+      propsShouldBeVisible: {
+        type: Boolean,
+        value: true,
+        readOnly: true
+      }
+    },
+
+    listeners: {
+      'px-demo-props-some-visible' : '_ensurePropsContainerVisible',
+      'px-demo-props-none-visible' : '_ensurePropsContainerHidden'
+    },
+
+    /**
+     * When the `px-demo-props` component notifies that some props are visible,
+     * make sure the properties container is visible.
+     */
+    _ensurePropsContainerVisible: function() {
+      var propsContainer = this.$.propsContainer;
+      if (propsContainer && propsContainer.classList.contains('visuallyhidden')) {
+        propsContainer.classList.remove('visuallyhidden');
+      }
+    },
+
+    /**
+     * When the `px-demo-props` component notifies that no props are visible,
+     * make sure the properties container is hidden.
+     */
+    _ensurePropsContainerHidden: function() {
+      var propsContainer = this.$.propsContainer;
+      if (propsContainer && !propsContainer.classList.contains('visuallyhidden')) {
+        propsContainer.classList.add('visuallyhidden');
+      }
+    },
+
     attached: function() {
       //find the content tag associated with demo-component
       var demoComponentContent = Polymer.dom(this.root).querySelector('content[select=px-demo-component]');

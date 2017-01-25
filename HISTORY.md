@@ -1,3 +1,7 @@
+1.2.6
+==========================
+* Add ability to specify which props are/are not shown
+
 1.2.5
 ==========================
 * Fix single/double quote replacement in px-demo-component-snippet
