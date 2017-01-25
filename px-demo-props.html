@@ -365,7 +365,7 @@ Creates inputs for configuration props.
      */
     _handleConfigUpdate: function(newConfig) {
       if (newConfig && Object.keys(newConfig).length) {
-        if (newConfig.configShowProps && Array.isArray(newConfig.configShowProps) && newConfig.configShowProps.length) {
+        if (newConfig.configShowProps && Array.isArray(newConfig.configShowProps)) {
           this._setEachPropVisibily('showOnly', newConfig.configShowProps);
         }
         else if (newConfig.configHideProps && Array.isArray(newConfig.configHideProps) && newConfig.configHideProps.length) {

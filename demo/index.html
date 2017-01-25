@@ -35,7 +35,7 @@
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component class="flex">
+      <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
           <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
@@ -222,15 +222,9 @@
               parentComponent: ["<div style='width:250px'>", "</div>"] },
 
             { configName: "No ranges",
-              displayMode: this.demoProps.displayMode.inputChoices[0],
-              preventRangeSelection: true,
-              blockFutureDates: false,
-              blockPastDates: false,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] },
+              // configReset: true,
+              configShowProps: []
+            },
 
             { configName: "Show months",
               displayMode: this.demoProps.displayMode.inputChoices[1],
@@ -296,6 +290,28 @@
       },
 
       blockDatesAfter: {
+        type: String,
+        defaultValue: '2022-10-10T00:00:00.000Z',
+        inputType: 'text',
+        inputPlaceholder: 'ISO 8601 String'
+      },
+
+      // extra
+      blockDatesAfter1: {
+        type: String,
+        defaultValue: '2022-10-10T00:00:00.000Z',
+        inputType: 'text',
+        inputPlaceholder: 'ISO 8601 String'
+      },
+
+      blockDatesAfter2: {
+        type: String,
+        defaultValue: '2022-10-10T00:00:00.000Z',
+        inputType: 'text',
+        inputPlaceholder: 'ISO 8601 String'
+      },
+
+      blockDatesAfter3: {
         type: String,
         defaultValue: '2022-10-10T00:00:00.000Z',
         inputType: 'text',

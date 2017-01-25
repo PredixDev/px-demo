@@ -73,8 +73,9 @@ gulp.task('serve', function() {
     server: ['./', 'bower_components'],
   });
 
-  gulp.watch(['css/*-styles.html', '*.html', '*.js']).on('change', browserSync.reload);
+  gulp.watch(['css/*-styles.html', '*.html', '*.js', 'demo/*.html']).on('change', browserSync.reload);
   gulp.watch(['sass/*.scss'], ['sass']);
+  
 });
 
 gulp.task('bump:patch', function(){

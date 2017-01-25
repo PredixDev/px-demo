@@ -1,3 +1,8 @@
+1.2.8
+==========================
+* added flex__item--msfix
+* fixed configShowProps to allow an 'configShowProps: []'
+
 1.2.7
 ==========================
 * Remove extraneous function checking if input is 'text' or 'number'
