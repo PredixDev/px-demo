@@ -1,3 +1,8 @@
+1.2.7
+==========================
+* Remove extraneous function checking if input is 'text' or 'number'
+* Fix bug that showed undefined value for empty text inputs
+
 1.2.6
 ==========================
 * Add ability to specify which props are/are not shown
