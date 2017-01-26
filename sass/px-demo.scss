@@ -47,6 +47,10 @@ $inuit-enable-btn--tertiary : true;
 // Component
 @import "px-demo-design/_component.demo.scss";
 
+.demo-collection__header {
+  border-bottom: 1px solid $gray3;
+}
+
 // Trumps
 $inuit-enable-margins : true;
 $inuit-enable-margins--tiny : true;

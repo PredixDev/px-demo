@@ -1,3 +1,7 @@
+1.3.0
+==========================
+* Add demo collection feature, for multiple demo sub-pages
+
 1.2.8
 ==========================
 * added flex__item--msfix
