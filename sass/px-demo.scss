@@ -58,6 +58,14 @@ $inuit-enable-btn--tertiary : true;
 .demo-collection__header__selector {
   padding-top: .13rem;
 }
+.demo-props__helper-text {
+  margin-top: ($inuit-base-spacing-unit--small * -1)!important;
+  @extend .u-mb-;
+}
+.demo-props__helper-text--dropdown {
+  margin-top: ($inuit-base-spacing-unit--tiny * -1)!important;
+  @extend .u-mb-;
+}
 
 // Trumps
 $inuit-enable-margins : true;

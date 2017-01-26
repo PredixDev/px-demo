@@ -44,7 +44,7 @@ Creates inputs for configuration props.
             </div>
           </div>
           <template is="dom-if" if="{{item.inputHelpText}}">
-            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+            <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
           </template>
         </template>
 
@@ -55,7 +55,7 @@ Creates inputs for configuration props.
             <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleTextInput" /></div>
           </div>
           <template is="dom-if" if="{{item.inputHelpText}}">
-            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+            <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
           </template>
         </template>
 
@@ -70,7 +70,7 @@ Creates inputs for configuration props.
             </div>
           </div>
           <template is="dom-if" if="{{item.inputHelpText}}">
-            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+            <p class="zeta demo-props__helper-text--dropdown">{{item.inputHelpText}}</p>
           </template>
         </template>
 
@@ -84,7 +84,7 @@ Creates inputs for configuration props.
             </div>
           </div>
           <template is="dom-if" if="{{item.inputHelpText}}">
-            <p class="zeta u-mt- u-mb-">{{item.inputHelpText}}</p>
+            <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
           </template>
         </template>
 

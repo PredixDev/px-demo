@@ -1,3 +1,7 @@
+1.3.3
+==========================
+* Fix alignment for props demo helper text
+
 1.3.2
 ==========================
 * Tweak spacing in the header to tighten up empty line-break
