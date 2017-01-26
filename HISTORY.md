@@ -1,3 +1,7 @@
+1.3.2
+==========================
+* Tweak spacing in the header to tighten up empty line-break
+
 1.3.1
 ==========================
 * Add style tweaks for collection deck selector

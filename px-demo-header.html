@@ -30,17 +30,21 @@ Creates a header for Predix UI demo pages.
 
     <section class="demo-background--base">
       <div class="demo-layout--center demo-u-pb+++ u-pt++ text--shadow">
-        <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/{{moduleName}}" target="_new">
-          <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
-        </a>
-        <h1 class="delta">{{moduleName}}</h1>
-        <div class="demo-text-width--max">
-          <p>{{description}}</p>
-        </div>
-        <div class="flex">
-          <img class="u-mr--" src="https://img.shields.io/travis/PredixDev/{{moduleName}}/master.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
-          <img class="u-mr--" src="https://img.shields.io/bower/v/{{moduleName}}.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
-          <img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/{{moduleName}}/master.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
+        <div class="flex flex--row">
+          <div class="flex__item flex__item__msfix">
+            <h1 class="delta">{{moduleName}}</h1>
+            <div class="demo-text-width--max">
+              <p>{{description}}</p>
+            </div>
+            <div class="flex">
+              <img class="u-mr--" src="https://img.shields.io/travis/PredixDev/{{moduleName}}/master.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
+              <img class="u-mr--" src="https://img.shields.io/bower/v/{{moduleName}}.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
+              <img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/{{moduleName}}/master.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
+            </div>
+          </div>
+          <a class="actionable u-mt+" href="https://github.com/PredixDev/{{moduleName}}" target="_new">
+            <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
+          </a>
         </div>
     	</div>
     </section>
