@@ -50,6 +50,14 @@ $inuit-enable-btn--tertiary : true;
 .demo-collection__header {
   border-bottom: 1px solid $gray3;
 }
+.demo-collection__header__text {
+  @extend .caps;
+  @extend .muted;
+  margin-right: $inuit-base-spacing-unit;
+}
+.demo-collection__header__selector {
+  padding-top: .13rem;
+}
 
 // Trumps
 $inuit-enable-margins : true;

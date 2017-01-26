@@ -28,10 +28,17 @@ Creates a container for a collection of demos.
     <style include="px-demo-styles"></style>
     <section class="demo-collection__header">
       <px-view-header use-deck-selector="true">
+        <!-- CAN BE USED TO SHOW A "BACK TO PARENT COMPONENT" IF WANTED -->
+        <!--
         <template is="dom-if" if="{{!_isInitialDeck(_selectedDeck)}}">
           <a class="left actionable caps" on-tap="_handleBackToInitial">&lt; back to {{demos.0.name}}</a>
         </template>
-        <px-deck-selector decks="{{_decks}}" selected-deck="{{_selectedDeck}}"></px-deck-selector>
+        -->
+        <div class="left flex flex--row">
+          <p class="demo-collection__header__text">View Children:</p>
+          <px-deck-selector class="u-mt- demo-collection__header__selector" decks="{{_decks}}" selected-deck="{{_selectedDeck}}"></px-deck-selector>
+        </div>
+
       </px-view-header>
     </section>
 

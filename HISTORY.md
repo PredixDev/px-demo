@@ -1,3 +1,7 @@
+1.3.1
+==========================
+* Add style tweaks for collection deck selector
+
 1.3.0
 ==========================
 * Add demo collection feature, for multiple demo sub-pages
