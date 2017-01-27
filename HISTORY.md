@@ -1,3 +1,7 @@
+1.3.5
+==========================
+* Add feature to configure the parent shield name, or hide shields altogether
+
 1.3.4
 ==========================
 * Remove dead code. Fix import. Add yarn.lock file
