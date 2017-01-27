@@ -1,3 +1,7 @@
+1.3.4
+==========================
+* Remove dead code. Fix import. Add yarn.lock file
+
 1.3.3
 ==========================
 * Fix alignment for props demo helper text
