@@ -1,3 +1,7 @@
+1.4.0
+==========================
+* added the ability to filter out or change description of properties for the api viewer.
+
 1.3.5
 ==========================
 * Add feature to configure the parent shield name, or hide shields altogether

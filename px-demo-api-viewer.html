@@ -32,7 +32,7 @@ Creates a header for Predix UI demo pages.
     <div class="demo-background--api">
       <div class="flex flex--col demo-layout--center u-pt++ u-pb++" >
         <div>
-          <px-api-viewer source="{{source}}"></px-api-viewer>
+          <px-api-viewer source="{{source}}" mark-read-only="{{markReadOnly}}" mark-private="{{markPrivate}}" hide="{{hide}}" change-description="{{changeDescription}}" filter-tag-by-prefix="px-"></px-api-viewer>
         </div>
       </div>
     </div>
@@ -44,12 +44,65 @@ Creates a header for Predix UI demo pages.
     is: 'px-demo-api-viewer',
 
     properties: {
+
       /**
        * Name of the source file to analyze to generate the API viewer.
        *
        * @property source
        */
       source: {
+        type: String,
+        value: ''
+      },
+      /**
+       * An array which contains the names of properties which will be removed
+       * from the hydrolysis object
+       * @type {Array}
+       */
+      hide: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      /**
+       * An array which contains the names of properties which will be marked
+       * as private
+       * @type {Array}
+       */
+      markPrivate: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      /**
+       * An array which contains the names of properties which will be marked
+       * as readonly
+       * @type {Array}
+       */
+      markReadOnly: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      /**
+       * an array which contains the names and new descriptions of
+       * properties we want to change the deccription of.
+       * @type {Array}
+       */
+       changeDescription: {
+         type: Array,
+         value: function() {
+           return [];
+         }
+       },
+      /**
+       * represents a prefix that we filter the elements by when we mutate the hydrolysis object.
+       * @type {String}
+       */
+      filterTagByPrefix: {
         type: String,
         value: ''
       }
