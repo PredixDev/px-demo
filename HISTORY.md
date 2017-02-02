@@ -1,3 +1,7 @@
+1.4.1
+==========================
+* compiling sass for change in px-demo-design
+
 1.4.0
 ==========================
 * added the ability to filter out or change description of properties for the api viewer.
