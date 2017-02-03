@@ -1,6 +1,10 @@
+1.4.2
+==========================
+* compiling sass for v1.1.0 of px-demo-design
+
 1.4.1
 ==========================
-* compiling sass for change in px-demo-design
+* compiling sass for change in px-demo-design v1.0.7
 
 1.4.0
 ==========================
