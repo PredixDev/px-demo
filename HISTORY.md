@@ -1,3 +1,8 @@
+v1.4.3
+==========================
+* compiling sass for v1.2.0 of px-demo-design
+* cleaning up some extra code
+
 v1.4.2
 ==========================
 * compiling sass for v1.1.0 of px-demo-design
