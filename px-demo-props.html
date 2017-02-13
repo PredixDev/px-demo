@@ -51,7 +51,7 @@ Creates inputs for configuration props.
           <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'text', 'number')}}">
             <div class="u-mb-">
               <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-              <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleTextInput" />
+              <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleNumberInput" />
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
               <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
@@ -273,6 +273,13 @@ Creates inputs for configuration props.
      */
     _handleTextInput: function(evt) {
       this._syncToProp(evt.target.prop, evt.target.value);
+    },
+
+   /**
+    * Binds a text input event to the prop.value it should change.
+    */
+    _handleNumberInput: function(evt) {
+      this._syncToProp(evt.target.prop, Number(evt.target.value));
     },
 
     /**
