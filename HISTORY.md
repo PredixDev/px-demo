@@ -1,3 +1,7 @@
+v1.4.4
+==========================
+* removed safari 8 from gulpfile autoprefixer
+
 v1.4.3
 ==========================
 * compiling sass for v1.2.0 of px-demo-design
