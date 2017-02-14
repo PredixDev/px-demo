@@ -1,3 +1,8 @@
+v1.4.5
+==========================
+* Ensure 'Number' properties are being coerced back to numbers before being passed back to the component
+* Use flex on the px-component-demo wrapper
+
 v1.4.4
 ==========================
 * removed safari 8 from gulpfile autoprefixer
