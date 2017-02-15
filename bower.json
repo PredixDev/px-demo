@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "main": [
     "px-demo.html"
   ],
@@ -16,12 +16,12 @@
     "scripts",
     ".github",
     "px-demo.png",
-    "LICENSE.md",
-    "CONTRIBUTING.md",
-    "HISTORY.md",
-    "README.md",
+    "*.md",
     ".jshintrc",
-    ".editorconfig"
+    ".editorconfig",
+    "monogram-wdmk.png",
+    "*.png",
+    "wct.conf.json"
   ],
   "dependencies": {
     "polymer": "^1.7.1",

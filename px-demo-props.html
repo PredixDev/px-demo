@@ -48,10 +48,21 @@ Creates inputs for configuration props.
           </template>
 
           <!-- INPUT: 'text'  -->
-          <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'text', 'number')}}">
+          <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
             <div class="u-mb-">
               <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-              <input id="text-{{item.prop}}" class="text-input u-mb--" type="{{item.inputType}}" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleNumberInput" />
+              <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleTextInput" />
+            </div>
+            <template is="dom-if" if="{{item.inputHelpText}}">
+              <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
+            </template>
+          </template>
+
+          <!-- INPUT: 'number'  -->
+          <template is="dom-if" if="{{_itIs(item.inputType, 'number')}}">
+            <div class="u-mb-">
+              <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <input id="text-{{item.prop}}" class="text-input u-mb--" type="number" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleNumberInput" />
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
               <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>

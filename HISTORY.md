@@ -1,3 +1,7 @@
+v1.4.6
+==========================
+* fixed issue of text fields setting on-input="_handleNumberInput" causing the field to display 'Nan'
+
 v1.4.5
 ==========================
 * Ensure 'Number' properties are being coerced back to numbers before being passed back to the component
