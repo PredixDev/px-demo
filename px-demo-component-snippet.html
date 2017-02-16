@@ -29,7 +29,9 @@ Wraps around `px-demo-snippet` to show code sample.
     <px-demo-snippet
         element-properties="{{_shallowProps}}"
         element-name="{{elementName}}"
-        links-includes="[[linksIncludes]]">
+        links-includes="[[linksIncludes]]"
+        scripts-includes="[[scriptsIncludes]]"
+        polygit-includes="[[polygitIncludes]]">
     </px-demo-snippet>
   </template>
 </dom-module>
@@ -60,11 +62,31 @@ Wraps around `px-demo-snippet` to show code sample.
       },
 
       /**
-       * Includes links for Codepen.
+       * An array of <link> include URLs required to make the CodePen work.
        *
        * @property linksIncludes
        */
       linksIncludes: {
+        type: Array,
+        value: function(){ return {}; }
+      },
+
+      /**
+       * An array of <script> include URLs required to make the CodePen work.
+       *
+       * @property linksIncludes
+       */
+      scriptsIncludes: {
+        type: Array,
+        value: function(){ return {}; }
+      },
+
+      /**
+       * An array of additional PolyGit includes required to make the CodePen work.
+       *
+       * @property linksIncludes
+       */
+      polygitIncludes: {
         type: Array,
         value: function(){ return {}; }
       },

@@ -117,6 +117,7 @@
        * - 'toggle' - A toggle switch input to set Boolean values
        * - 'text' - A simple single-line text input to set String or stringified Array/Object values
        * - 'dropdown' - A dropdown picker that can be used to select any kind of value from a list of available options
+       * - 'code:JSON' - A input field with edit button that opens up a code editor to edit the array or object 
        *
        * Full examples for each input:
        *
@@ -138,6 +139,19 @@
        *         value: '2016-10-10T00:00:00.000Z',
        *         inputType: 'text',
        *         inputPlaceholder: 'ISO 8601 String'
+       *       }
+       *       decks: {
+       *         type: Array,
+       *         defaultValue: [
+       *           {name: 'First Deck', url: '/deck1'},
+       *           {name: 'Second Deck', url: '/deck2'},
+       *           {name: 'Third Deck', url: '/deck3'}
+       *         ],
+       *         inputType: 'code:JSON'
+       *       },
+       *       otherAvailableKeys: {
+       *         inputLabel: 'property label you want displayed',
+       *         inputDisabled: true
        *       }
        *     }
        * ```

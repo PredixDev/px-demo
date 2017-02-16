@@ -1,3 +1,7 @@
+v1.4.8
+==========================
+* added scriptsIncludes & polygitIncludes in px-demo-component-snippet
+
 v1.4.7
 ==========================
 * removed *.png & monogram-wdmk.png from bower ignore because demo pages need this file
