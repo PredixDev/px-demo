@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "main": [
     "px-demo.html"
   ],
@@ -19,8 +19,6 @@
     "*.md",
     ".jshintrc",
     ".editorconfig",
-    "monogram-wdmk.png",
-    "*.png",
     "wct.conf.json"
   ],
   "dependencies": {

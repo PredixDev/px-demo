@@ -1,3 +1,7 @@
+v1.4.7
+==========================
+* removed *.png & monogram-wdmk.png from bower ignore because demo pages need this file
+
 v1.4.6
 ==========================
 * fixed issue of text fields setting on-input="_handleNumberInput" causing the field to display 'Nan'
