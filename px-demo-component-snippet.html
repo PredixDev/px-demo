@@ -31,7 +31,8 @@ Wraps around `px-demo-snippet` to show code sample.
         element-name="{{elementName}}"
         links-includes="[[linksIncludes]]"
         scripts-includes="[[scriptsIncludes]]"
-        polygit-includes="[[polygitIncludes]]">
+        polygit-includes="[[polygitIncludes]]"
+        code-link="[[codepenLink]]">
     </px-demo-snippet>
   </template>
 </dom-module>
@@ -74,7 +75,7 @@ Wraps around `px-demo-snippet` to show code sample.
       /**
        * An array of <script> include URLs required to make the CodePen work.
        *
-       * @property linksIncludes
+       * @property scriptsIncludes
        */
       scriptsIncludes: {
         type: Array,
@@ -84,7 +85,7 @@ Wraps around `px-demo-snippet` to show code sample.
       /**
        * An array of additional PolyGit includes required to make the CodePen work.
        *
-       * @property linksIncludes
+       * @property polygitIncludes
        */
       polygitIncludes: {
         type: Array,

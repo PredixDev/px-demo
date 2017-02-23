@@ -1,3 +1,7 @@
+v1.4.9
+==========================
+* added codepenLink in px-demo-component-snippet & enable-validation-states
+
 v1.4.8
 ==========================
 * added scriptsIncludes & polygitIncludes in px-demo-component-snippet
