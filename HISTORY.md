@@ -1,3 +1,7 @@
+v1.4.10
+==========================
+* added theming for collection deck selector
+
 v1.4.9
 ==========================
 * added codepenLink in px-demo-component-snippet & enable-validation-states
