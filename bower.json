@@ -33,7 +33,8 @@
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.6",
     "px-code-editor": "^1.0.0",
     "px-view-header": "^0.2.3",
-    "px-deck-selector": "^1.6.4"
+    "px-deck-selector": "^1.6.4",
+    "px-typeahead": "^0.2.20"
   },
   "devDependencies": {
     "px-forms-design": "^1.1.3",

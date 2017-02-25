@@ -5,6 +5,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-dropdown/px-dropdown.html" />
+<link rel="import" href="../px-typeahead/px-typeahead.html" />
 
 <!-- Import style module -->
 <link rel="import" href="css/px-demo-styles.html">
@@ -77,6 +78,20 @@ Creates inputs for configuration props.
                 <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
                   <px-dropdown-content items="{{item.inputChoices}}" prop="{{item.prop}}"></px-dropdown-content>
                 </px-dropdown>
+              </div>
+            </div>
+            <template is="dom-if" if="{{item.inputHelpText}}">
+              <p class="zeta demo-props__helper-text--dropdown">{{item.inputHelpText}}</p>
+            </template>
+          </template>
+
+          <!-- INPUT: 'typeahead'  -->
+          <template is="dom-if" if="{{_itIs(item.inputType, 'typeahead')}}">
+            <div class="u-mb-">
+              <label for="typeahead-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <div style="width: 100%;" class="u-mb--">
+                <px-typeahead id="typeahead-{{item.prop}}"  local-candidates="{{item.localCandidates}}" prefetch-url="{{item.prefetchUrl}}" placeholder="[[item.inputPlaceholder]]" input-value="{{item.value}}" prop="{{item.prop}}" on-px-typeahead-item-selected="_handleTypeaheadItemSelected" on-px-typeahead-search-input-change="_handleTypeaheadInput">
+                </px-typeahead>
               </div>
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -301,10 +316,23 @@ Creates inputs for configuration props.
     },
 
     /**
-     * Binds a toggle input event to the prop.value it should change.
+     * Binds a dropdown input event to the prop.value it should change.
      */
     _handleDropdownInput: function(evt) {
       this._syncToProp(evt.target.prop, evt.detail.val);
+    },
+
+    /**
+     * Binds a typeahead input event to the prop.value it should change.
+     */
+    _handleTypeaheadInput: function(evt) {
+      this._syncToProp(evt.target.prop, evt.detail.srcElement.value);
+    },
+    /**
+     * Binds a typeahead selected event to the prop.value it should change.
+     */
+    _handleTypeaheadItemSelected: function(evt) {
+      this._syncToProp(evt.target.prop, evt.detail);
     },
 
     /**

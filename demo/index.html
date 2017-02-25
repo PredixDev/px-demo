@@ -273,7 +273,7 @@
 
       blockPastDates: {
         type: Boolean,
-        defaultValue: true,
+        defaultValue: false,
         inputType: 'toggle'
       },
 
@@ -298,9 +298,11 @@
 
       blockDatesBefore: {
         type: String,
-        defaultValue: '2016-10-10T00:00:00.000Z',
-        inputType: 'text',
-        inputPlaceholder: 'ISO 8601 String'
+        defaultValue: '2017-02-05T00:00:00.000Z',
+        inputType: 'typeahead',
+        inputPlaceholder: 'ISO 8601 String',
+        localCandidates: ["2016-10-10T00:00:00.000Z","2017-02-20T00:00:00.000Z","American Samoa","Arizona","Arkansas","California"],
+        maxSuggestions: 10
       },
 
       blockDatesAfter: {
