@@ -37,13 +37,16 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
+          <p><strong>px-calendar-selected</strong> fired <strong>{{calendarEventCounter}}</strong> time(s)</p>
+          <p>Current dateTime object: <strong>{{dateTimeObject}}</strong></p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p id="counterRange{{indexPlusOne(index)}}"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="rangeString{{indexPlusOne(index)}}">Current range object:</p>
+          <p><strong>px-calendar-range-selected</strong> fired <strong>{{calendarRangeEventCounter}}</strong> time(s)</p>
+          <p>Current range object:
+          <template is="dom-if" if="{{rangeToObject}}">
+            <strong>{{rangeFromObject}}</strong> To: <strong>{{rangeToObject}}</strong></p>
+          </template>
         </template>
 
         <div style="width:250px">
@@ -97,7 +100,7 @@
        *
        * @example
        *
-       * `demoProps` is an object containing multipe objects. Each sub-object has
+       * `demoProps` is an object containing multiple objects. Each sub-object has
        * should have a key with the name of the configurable property, and a set
        * of values that describe that property. At a high level, you might have:
        *
@@ -117,7 +120,7 @@
        * - 'toggle' - A toggle switch input to set Boolean values
        * - 'text' - A simple single-line text input to set String or stringified Array/Object values
        * - 'dropdown' - A dropdown picker that can be used to select any kind of value from a list of available options
-       * - 'code:JSON' - A input field with edit button that opens up a code editor to edit the array or object 
+       * - 'code:JSON' - A input field with edit button that opens up a code editor to edit the array or object
        *
        * Full examples for each input:
        *
@@ -179,6 +182,31 @@
         value: function(){ return this.demoProps; }
       },
 
+      calendarEventCounter: {
+        type: Number,
+        value: 0
+      },
+
+      dateTimeObject: {
+        type: String,
+        value: ""
+      },
+
+      calendarRangeEventCounter: {
+        type: Number,
+        value: 0
+      },
+
+      rangeFromObject: {
+        type: String,
+        value: ""
+      },
+
+      rangeToObject: {
+        type: String,
+        value: ""
+      },
+
       /**
        * An array of pre-configured `props` that can be used to provide the user
        * with a set of common examples. These configs will be made available
@@ -236,9 +264,13 @@
               parentComponent: ["<div style='width:250px'>", "</div>"] },
 
             { configName: "No ranges",
-              // configReset: true,
-              configShowProps: []
-            },
+              displayMode: this.demoProps.displayMode.inputChoices[0],
+              preventRangeSelection: true,
+              blockFutureDates: false,
+              blockPastDates: false,
+              hideNextButton: false,
+              hidePreviousButton: false,
+              parentComponent: ["<div style='width:250px'>", "</div>"] },
 
             { configName: "Show months",
               displayMode: this.demoProps.displayMode.inputChoices[1],
@@ -309,7 +341,23 @@
         inputType: 'text',
         inputPlaceholder: 'ISO 8601 String'
       }
-    }
+    },
+
+    listeners: {
+      'px-calendar-selected' : 'pxCalendarSelected',
+      'px-calendar-range-selected' : 'pxCalendarRangeSelected'
+    },
+
+    pxCalendarSelected: function(evt) {
+      this.calendarEventCounter++;
+      this.dateTimeObject = evt.detail.dateTime;
+    },
+
+    pxCalendarRangeSelected: function(evt) {
+      this.calendarRangeEventCounter++;
+      this.rangeFromObject = evt.detail.range.from;
+      this.rangeToObject = evt.detail.range.to;
+    },
 
   });
 </script>
