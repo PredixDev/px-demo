@@ -45,12 +45,13 @@ used to edit complex props.
         <div class="demo-code-editor__header">
           <h4>{{title}}</h4>
         </div>
-        <div class="demo-code-editor__body [ flex__item ]">
+        <div class="demo-code-editor__body [ flex__item flex flex--col ]">
           <px-code-editor
               id="codeEditor"
               disable-linter
               enable-beautify
               enable-save-to-update
+              flex-to-size
               content="var foo = 'bar';">
           </px-code-editor>
         </div>
