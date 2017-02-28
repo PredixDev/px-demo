@@ -37,12 +37,12 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-selected</strong> fired <strong>{{calendarEventCounter}}</strong> time(s)</p>
+          <p><strong>px-calendar-selected</strong> fired <strong>{{chosenConfig._calendarEventCounter}}</strong> time(s)</p>
           <p>Current dateTime object: <strong>{{dateTimeObject}}</strong></p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-range-selected</strong> fired <strong>{{calendarRangeEventCounter}}</strong> time(s)</p>
+          <p><strong>px-calendar-range-selected</strong> fired <strong>{{chosenConfig._calendarRangeEventCounter}}</strong> time(s)</p>
           <p>Current range object:
           <template is="dom-if" if="{{rangeToObject}}">
             <strong>{{rangeFromObject}}</strong> To: <strong>{{rangeToObject}}</strong></p>
@@ -58,7 +58,7 @@
               block-dates-before="{{props.blockDatesBefore.value}}"
               block-dates-after="{{props.blockDatesAfter.value}}"
               hide-next-button="{{props.hideNextButton.value}}"
-              hide-previous-button="{{props.hidePreviousButton.value}}">
+              hide-previous-button="{{props.hidePreviousButton.value}}"
           </px-calendar-picker>
         </div>
       </px-demo-component>
@@ -174,7 +174,7 @@
        *     }
        * ```
        *
-       * @property demoProps
+       * @property props
        * @type {Object}
        */
       props: {
@@ -182,30 +182,37 @@
         value: function(){ return this.demoProps; }
       },
 
-      calendarEventCounter: {
-        type: Number,
-        value: 0
-      },
-
+      /**
+      * The dateTime object selected by the user
+      * @property dateTimeObject
+      * @type {Object}
+      */
       dateTimeObject: {
         type: String,
         value: ""
       },
 
-      calendarRangeEventCounter: {
-        type: Number,
-        value: 0
-      },
-
+      /**
+      * The "from" dateTime object selected by the user
+      *@property rangeFromObject
+      * @type {Object}
+      */
       rangeFromObject: {
         type: String,
         value: ""
       },
 
+      /**
+      * The "to" dateTime object selected by the user
+      * @property rangeToObject
+      * @type {Object}
+      */
       rangeToObject: {
         type: String,
         value: ""
       },
+
+      chosenConfig: {},
 
       /**
        * An array of pre-configured `props` that can be used to provide the user
@@ -242,7 +249,7 @@
        *     ]
        * ```
        *
-       * @property demoProps
+       * @property configs
        * @type {Array}
        */
       configs: {
@@ -250,38 +257,46 @@
         value: function(){
           return [
             { configName: "Default",
-              configReset: true },
+            configReset: true,
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0 },
 
             { configName: "Future dates with ranges",
-              displayMode: this.demoProps.displayMode.inputChoices[0],
-              preventRangeSelection: false,
-              blockFutureDates: false,
-              blockPastDates: true,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] },
+            displayMode: this.demoProps.displayMode.inputChoices[0],
+            preventRangeSelection: false,
+            blockFutureDates: false,
+            blockPastDates: true,
+            blockDatesBefore: '',
+            blockDatesAfter: '',
+            hideNextButton: false,
+            hidePreviousButton: false,
+            parentComponent: ["<div style='width:250px'>", "</div>"],
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0 },
 
             { configName: "No ranges",
-              displayMode: this.demoProps.displayMode.inputChoices[0],
-              preventRangeSelection: true,
-              blockFutureDates: false,
-              blockPastDates: false,
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] },
+            displayMode: this.demoProps.displayMode.inputChoices[0],
+            preventRangeSelection: true,
+            blockFutureDates: false,
+            blockPastDates: false,
+            hideNextButton: false,
+            hidePreviousButton: false,
+            parentComponent: ["<div style='width:250px'>", "</div>"],
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0  },
 
             { configName: "Show months",
-              displayMode: this.demoProps.displayMode.inputChoices[1],
-              preventRangeSelection: false,
-              blockFutureDates: false,
-              blockPastDates: false,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] }
+            displayMode: this.demoProps.displayMode.inputChoices[1],
+            preventRangeSelection: false,
+            blockFutureDates: false,
+            blockPastDates: false,
+            blockDatesBefore: '',
+            blockDatesAfter: '',
+            hideNextButton: false,
+            hidePreviousButton: false,
+            parentComponent: ["<div style='width:250px'>", "</div>"],
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0  }
           ]
         }
       }
@@ -341,6 +356,7 @@
         inputType: 'text',
         inputPlaceholder: 'ISO 8601 String'
       }
+
     },
 
     listeners: {
@@ -349,14 +365,18 @@
     },
 
     pxCalendarSelected: function(evt) {
-      this.calendarEventCounter++;
+      if (!this.chosenConfig || (typeof this.chosenConfig._calendarEventCounter !== "number")) return;
+      this.chosenConfig._calendarEventCounter++;
       this.dateTimeObject = evt.detail.dateTime;
+      this.notifyPath("chosenConfig._calendarEventCounter");
     },
 
     pxCalendarRangeSelected: function(evt) {
-      this.calendarRangeEventCounter++;
+      if (!this.chosenConfig || (typeof this.chosenConfig._calendarRangeEventCounter !== "number")) return;
+      this.chosenConfig._calendarRangeEventCounter++;
       this.rangeFromObject = evt.detail.range.from;
       this.rangeToObject = evt.detail.range.to;
+      this.notifyPath("chosenConfig._calendarRangeEventCounter");
     },
 
   });

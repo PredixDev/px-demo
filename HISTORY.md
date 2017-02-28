@@ -1,3 +1,7 @@
+v1.4.11
+==========================
+* fix event fired label behavior for calendar picker
+
 v1.4.10
 ==========================
 * added theming for collection deck selector
