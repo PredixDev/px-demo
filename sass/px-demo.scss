@@ -49,7 +49,7 @@ $inuit-enable-btn--tertiary : true;
 @import "px-demo-design/_component.demo.scss";
 
 .demo-collection__header {
-  border-bottom: 1px solid $gray3;
+  border-bottom: 1px solid var(--px-demo-collection-bottom-border-color, $gray3); 
 }
 .demo-collection__header__text {
   @extend .caps;

@@ -1,3 +1,15 @@
+v1.4.12
+==========================
+* Set `flex-to-size` attribute on px-code-editor to ensure it fits available space
+
+v1.4.11
+==========================
+* Set `codepenLink` attribute in px-demo-code-snippet to default to an undefined value instead of an Object, which it should have never been. Fixes a bug where CodePen links break because checking `if (this.codeLink)` on an object returns a truthy value, instead of returning falsy like an undefined or empty string.
+
+v1.4.10
+==========================
+* added theming for collection deck selector
+
 v1.4.9
 ==========================
 * added codepenLink in px-demo-component-snippet & enable-validation-states
