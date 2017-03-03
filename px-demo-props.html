@@ -317,6 +317,7 @@ Creates inputs for configuration props.
       var propVal = prop.value;
       var propFriendlyName = this._formatInputLabel(prop.inputLabel || evt.target.prop);
       if (propVal) {
+
         this.fire('px-demo-props-code-edit-request', {
           code: propVal,
           expectedReturnType: propType,
@@ -324,7 +325,8 @@ Creates inputs for configuration props.
           editorTitle: "Property Editor: " + propFriendlyName,
           done: function(err, newContent) {
             if (newContent) {
-              this._syncToProp(evt.target.prop, newContent);
+              propVal;
+              this._syncToProp(Polymer.dom(evt).rootTarget.prop, newContent);
             }
           }.bind(this)
         });
@@ -347,20 +349,34 @@ Creates inputs for configuration props.
      * @param {Object} propChangeInfo - Object emitted by the complex change listener watching deep paths in `props`
      */
     _syncToField: function(propChangeInfo) {
-      if (propChangeInfo && (typeof propChangeInfo === 'object') && propChangeInfo.path && propChangeInfo.path.indexOf('.value') !== -1) {
-        this.debounce('sync-to-field' + propChangeInfo.path, function() {
-          // Get the name of the prop changed
-          var prop = propChangeInfo.path.replace('props.', '').replace('.value', '');
-          // Find the index of the prop in `_fields` array
-          var indexOfField = this.get('_fieldsIndex.' + prop);
-          // Pop the value
-          var fieldValPath = '_fields.' + indexOfField + '.value';
-          var fieldVal = this.get(fieldValPath);
-          // If an update is needed, make it
-          if ((typeof fieldVal !== 'undefined') && fieldVal !== propChangeInfo.value) {
-            this.set(fieldValPath, propChangeInfo.value);
+
+      if (propChangeInfo && (typeof propChangeInfo === 'object') && propChangeInfo.path) {
+
+        var toSync = ['value', 'inputDisabled'];
+
+        //look for all things we might want to sync
+        for(var i=0; i< toSync.length; i++) {
+          //is this change about this prop?
+          if(propChangeInfo.path.indexOf('.' + toSync[i]) !== -1) {
+
+            this.debounce('sync-to-field' + propChangeInfo.path, function() {
+              // Get the name of the prop changed
+              var prop = propChangeInfo.path.replace('props.', '').replace('.' + toSync[i], '');
+              // Find the index of the prop in `_fields` array
+              var indexOfField = this.get('_fieldsIndex.' + prop);
+              // Pop the value
+              var fieldValPath = '_fields.' + indexOfField + '.' + toSync[i];
+              var fieldVal = this.get(fieldValPath);
+              // If an update is needed, make it
+              if ((typeof fieldVal !== 'undefined') && fieldVal !== propChangeInfo.value) {
+                this.set(fieldValPath, propChangeInfo.value);
+              }
+            }, 50);
+
+            //break so we keep the right index for this prop
+            break;
           }
-        }, 50);
+        }
       }
     },
 

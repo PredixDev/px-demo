@@ -1,3 +1,8 @@
+v1.4.14
+==========================
+* make disableInput dynamic
+* ensure json editor saves value in shadow dom
+
 v1.4.13
 ==========================
 * fix event fired label behavior for calendar picker
