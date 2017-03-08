@@ -1,3 +1,7 @@
+v1.4.15
+==========================
+* update event fired label in calendar picker demo
+
 v1.4.14
 ==========================
 * make disableInput dynamic
