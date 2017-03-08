@@ -1,3 +1,7 @@
+v1.4.16
+==========================
+* add disabled toggles
+
 v1.4.15
 ==========================
 * update event fired label in calendar picker demo

@@ -30,6 +30,7 @@ $actionable : true;
 @import "px-actionable-text-icons-design/_objects.actionable.scss";
 
 $inuit-enable-toggle--small : true;
+$inuit-enable-toggle--disabled: true;
 @import "px-toggle-design/_objects.toggle.scss";
 
 $inuit-enable-input--regular : true;

@@ -38,8 +38,8 @@ Creates inputs for configuration props.
             <div class="flex flex--justify u-mb-">
               <div>{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
-                <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" on-change="_handleToggleInput" disabled$="{{_itIsTrue(item.inputDisabled)}}">
-                <label for$="toggle-{{item.prop}}" class="toggle__label toggle__label--small"></label>
+                <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" on-change="_handleToggleInput">
+                <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small"></label>
               </div>
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -227,6 +227,18 @@ Creates inputs for configuration props.
       if (typeof it === 'boolean') return it === true;
       if (it === 'true') return true;
       if (it === 'false') return false;
+      return;
+    },
+
+    /**
+     * Convenience method for checking if toggle is disabled and returning appropriate class.
+     *
+     * @return {String}
+     */
+    _itIsDisabled: function(it) {
+      if (typeof it === 'boolean') return it === true ? 'toggle--disabled' : '';
+      if (it === 'true') return 'toggle--disabled';
+      if (it === 'false') return '';
       return;
     },
 
