@@ -1,5 +1,9 @@
 v1.4.16
 ==========================
+* update px-api-viewer dependency
+
+v1.4.16
+==========================
 * add disabled toggles
 
 v1.4.15
