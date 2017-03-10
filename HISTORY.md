@@ -2,6 +2,31 @@ v1.5.0
 ==========================
 * Added typeahead option to demo props
 
+v1.4.19
+==========================
+* fix #6
+
+v1.4.17
+==========================
+* update px-api-viewer dependency
+
+v1.4.16
+==========================
+* add disabled toggles
+
+v1.4.15
+==========================
+* update event fired label in calendar picker demo
+
+v1.4.14
+==========================
+* make disableInput dynamic
+* ensure json editor saves value in shadow dom
+
+v1.4.13
+==========================
+* fix event fired label behavior for calendar picker
+
 v1.4.12
 ==========================
 * Set `flex-to-size` attribute on px-code-editor to ensure it fits available space

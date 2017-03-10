@@ -1,6 +1,6 @@
 <!-- Common imports -->
 <link rel="import" href="../../polymer/polymer.html" />
-<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
+<link rel="import" href="../../px-polymer-font-awesome/px-polymer-font-awesome.html" />
 
 <!-- Common demo imports -->
 <link rel="import" href="../px-demo-header.html" />
@@ -23,7 +23,7 @@
     <!-- Header -->
     <px-demo-header
         module-name="px-calendar-picker"
-        description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or date range. The main use of this component is to be used in the px-range-panel.">
+        description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or a date range. The main use of this component is to be used in the px-range-panel.">
     </px-demo-header>
 
     <!-- Interactive -->
@@ -37,13 +37,13 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
+          <p class=u-mb0>Event fired: <strong>px-calendar-selected</strong></p>
+          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p id="counterRange{{indexPlusOne(index)}}"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="rangeString{{indexPlusOne(index)}}">Current range object:</p>
+          <p class=u-mb0>Event fired: <strong>px-calendar-range-selected</strong></p>
+          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
         <div style="width:250px">
@@ -52,8 +52,6 @@
               block-future-dates="{{props.blockFutureDates.value}}"
               block-past-dates="{{props.blockPastDates.value}}"
               prevent-range-selection="{{props.preventRangeSelection.value}}"
-              block-dates-before="{{props.blockDatesBefore.value}}"
-              block-dates-after="{{props.blockDatesAfter.value}}"
               hide-next-button="{{props.hideNextButton.value}}"
               hide-previous-button="{{props.hidePreviousButton.value}}">
           </px-calendar-picker>
@@ -97,7 +95,7 @@
        *
        * @example
        *
-       * `demoProps` is an object containing multipe objects. Each sub-object has
+       * `demoProps` is an object containing multiple objects. Each sub-object has
        * should have a key with the name of the configurable property, and a set
        * of values that describe that property. At a high level, you might have:
        *
@@ -117,7 +115,7 @@
        * - 'toggle' - A toggle switch input to set Boolean values
        * - 'text' - A simple single-line text input to set String or stringified Array/Object values
        * - 'dropdown' - A dropdown picker that can be used to select any kind of value from a list of available options
-       * - 'code:JSON' - A input field with edit button that opens up a code editor to edit the array or object 
+       * - 'code:JSON' - A input field with edit button that opens up a code editor to edit the array or object
        *
        * Full examples for each input:
        *
@@ -171,7 +169,7 @@
        *     }
        * ```
        *
-       * @property demoProps
+       * @property props
        * @type {Object}
        */
       props: {
@@ -214,7 +212,7 @@
        *     ]
        * ```
        *
-       * @property demoProps
+       * @property configs
        * @type {Array}
        */
       configs: {
@@ -222,34 +220,38 @@
         value: function(){
           return [
             { configName: "Default",
-              configReset: true },
+            configReset: true },
 
             { configName: "Future dates with ranges",
-              displayMode: this.demoProps.displayMode.inputChoices[0],
-              preventRangeSelection: false,
-              blockFutureDates: false,
-              blockPastDates: true,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] },
+            displayMode: this.demoProps.displayMode.inputChoices[0],
+            preventRangeSelection: false,
+            blockFutureDates: false,
+            blockPastDates: true,
+            blockDatesBefore: '',
+            blockDatesAfter: '',
+            hideNextButton: false,
+            hidePreviousButton: false,
+            parentComponent: ["<div style='width:250px'>", "</div>"] },
 
             { configName: "No ranges",
-              // configReset: true,
-              configShowProps: []
-            },
+            displayMode: this.demoProps.displayMode.inputChoices[0],
+            preventRangeSelection: true,
+            blockFutureDates: false,
+            blockPastDates: false,
+            hideNextButton: false,
+            hidePreviousButton: false,
+            parentComponent: ["<div style='width:250px'>", "</div>"] },
 
             { configName: "Show months",
-              displayMode: this.demoProps.displayMode.inputChoices[1],
-              preventRangeSelection: false,
-              blockFutureDates: false,
-              blockPastDates: false,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] }
+            displayMode: this.demoProps.displayMode.inputChoices[1],
+            preventRangeSelection: false,
+            blockFutureDates: false,
+            blockPastDates: false,
+            blockDatesBefore: '',
+            blockDatesAfter: '',
+            hideNextButton: false,
+            hidePreviousButton: false,
+            parentComponent: ["<div style='width:250px'>", "</div>"] }
           ]
         }
       }
@@ -301,17 +303,22 @@
         defaultValue: '2017-02-05T00:00:00.000Z',
         inputType: 'typeahead',
         inputPlaceholder: 'ISO 8601 String',
-        localCandidates: ["2016-10-10T00:00:00.000Z","2017-02-20T00:00:00.000Z","American Samoa","Arizona","Arkansas","California"],
-        maxSuggestions: 10
+        inputLocalCandidates: ["2017-03-10T00:00:00.000Z","2017-04-10T00:00:00.000Z", "2017-05-10T00:00:00.000Z", "2017-06-10T00:00:00.000Z", "2017-07-10T00:00:00.000Z", "2017-08-10T00:00:00.000Z"],
       },
 
       blockDatesAfter: {
         type: String,
-        defaultValue: '2022-10-10T00:00:00.000Z',
+        defaultValue: '2017-03-10T00:00:00.000Z',
         inputType: 'text',
         inputPlaceholder: 'ISO 8601 String'
       }
+
+    },
+
+    ready: function () {
+      this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
     }
+
 
   });
 </script>

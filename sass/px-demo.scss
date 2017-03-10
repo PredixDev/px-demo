@@ -30,6 +30,7 @@ $actionable : true;
 @import "px-actionable-text-icons-design/_objects.actionable.scss";
 
 $inuit-enable-toggle--small : true;
+$inuit-enable-toggle--disabled: true;
 @import "px-toggle-design/_objects.toggle.scss";
 
 $inuit-enable-input--regular : true;
@@ -66,6 +67,10 @@ $inuit-enable-btn--tertiary : true;
 .demo-props__helper-text--dropdown {
   margin-top: ($inuit-base-spacing-unit--tiny * -1)!important;
   @extend .u-mb-;
+}
+
+.px-demo-props.text-input {
+  min-width: $inuit-base-spacing-unit;
 }
 
 // Trumps
