@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "1.4.12",
+  "version": "1.5.0",
   "main": [
     "px-demo.html"
   ],
@@ -34,7 +34,7 @@
     "px-code-editor": "^1.0.0",
     "px-view-header": "^0.2.3",
     "px-deck-selector": "^1.6.4",
-    "px-typeahead": "^0.2.20"
+    "px-typeahead": "1.0.0"
   },
   "devDependencies": {
     "px-forms-design": "^1.1.3",

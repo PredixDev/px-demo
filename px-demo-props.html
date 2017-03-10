@@ -90,7 +90,14 @@ Creates inputs for configuration props.
             <div class="u-mb-">
               <label for="typeahead-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div style="width: 100%;" class="u-mb--">
-                <px-typeahead id="typeahead-{{item.prop}}"  local-candidates="{{item.localCandidates}}" prefetch-url="{{item.prefetchUrl}}" placeholder="[[item.inputPlaceholder]]" input-value="{{item.value}}" prop="{{item.prop}}" on-px-typeahead-item-selected="_handleTypeaheadItemSelected" on-px-typeahead-search-input-change="_handleTypeaheadInput">
+                <px-typeahead 
+                  id="typeahead-{{item.prop}}"  
+                  local-candidates="{{item.inputLocalCandidates}}" 
+                  prefetch-url="{{item.inputPrefetchUrl}}" 
+                  placeholder="[[item.inputPlaceholder]]" 
+                  input-value="{{item.value}}" 
+                  prop="{{item.prop}}" 
+                  on-px-typeahead-item-selected="_handleTypeaheadItemSelected">
                 </px-typeahead>
               </div>
             </div>
@@ -320,13 +327,6 @@ Creates inputs for configuration props.
      */
     _handleDropdownInput: function(evt) {
       this._syncToProp(evt.target.prop, evt.detail.val);
-    },
-
-    /**
-     * Binds a typeahead input event to the prop.value it should change.
-     */
-    _handleTypeaheadInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.detail.srcElement.value);
     },
     /**
      * Binds a typeahead selected event to the prop.value it should change.

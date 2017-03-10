@@ -1,3 +1,7 @@
+v1.5.0
+==========================
+* Added typeahead option to demo props
+
 v1.4.12
 ==========================
 * Set `flex-to-size` attribute on px-code-editor to ensure it fits available space
