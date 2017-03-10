@@ -318,7 +318,6 @@ Creates inputs for configuration props.
      * Binds a text input event to the prop.value it should change.
      */
     _handleTextInput: function(evt) {
-      debugger
       this._syncToProp(evt.target.prop, evt.target.value);
     },
 
@@ -346,15 +345,13 @@ Creates inputs for configuration props.
      * Binds a typeahead selected event to the prop.value it should change.
      */
     _handleTypeaheadItemSelected: function(evt) {
-      debugger
       this._syncToProp(evt.target.prop, evt.detail);
     },
     /**
      * Binds a typeahead input event to the prop.value it should change.
      */
     _handleTypeaheadInput: function(evt) {
-      debugger
-      this._syncToProp(evt.target.prop, evt.detail);
+      this._syncToProp(evt.target.prop, evt.detail.srcElement.value);
     },
 
     /**

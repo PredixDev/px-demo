@@ -53,7 +53,9 @@
               block-past-dates="{{props.blockPastDates.value}}"
               prevent-range-selection="{{props.preventRangeSelection.value}}"
               hide-next-button="{{props.hideNextButton.value}}"
-              hide-previous-button="{{props.hidePreviousButton.value}}">
+              hide-previous-button="{{props.hidePreviousButton.value}}"
+              block-dates-before="{{props.blockDatesBefore.value}}"
+              block-dates-after="{{props.blockDatesAfter.value}}">
           </px-calendar-picker>
         </div>
       </px-demo-component>
@@ -305,10 +307,16 @@
         inputPlaceholder: 'ISO 8601 String',
         inputLocalCandidates: ["2017-03-10T00:00:00.000Z","2017-04-10T00:00:00.000Z", "2017-05-10T00:00:00.000Z", "2017-06-10T00:00:00.000Z", "2017-07-10T00:00:00.000Z", "2017-08-10T00:00:00.000Z"],
       },
+      // blockDatesBefore:{
+      //   type: String,
+      //   defaultValue: '2017-03-10T00:00:00.000Z',
+      //   inputType: 'text',
+      //   inputPlaceholder: 'ISO 8601 String'
+      // },
 
       blockDatesAfter: {
         type: String,
-        defaultValue: '2017-03-10T00:00:00.000Z',
+        defaultValue: '2017-03-20T00:00:00.000Z',
         inputType: 'text',
         inputPlaceholder: 'ISO 8601 String'
       }
