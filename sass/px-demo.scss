@@ -69,6 +69,10 @@ $inuit-enable-btn--tertiary : true;
   @extend .u-mb-;
 }
 
+.demo-props.text-input {
+  min-width: $inuit-base-spacing-unit;
+}
+
 // Trumps
 $inuit-enable-margins : true;
 $inuit-enable-margins--tiny : true;
