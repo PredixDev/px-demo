@@ -1,3 +1,7 @@
+v1.5.1
+==========================
+* removed _handleTypeaheadInput to prevent early event firing
+
 v1.5.0
 ==========================
 * Added typeahead option to demo props

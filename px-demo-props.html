@@ -97,8 +97,7 @@ Creates inputs for configuration props.
                   placeholder="[[item.inputPlaceholder]]" 
                   input-value="{{item.value}}" 
                   prop="{{item.prop}}" 
-                  on-px-typeahead-item-selected="_handleTypeaheadItemSelected"
-                  on-px-typeahead-search-input-change="_handleTypeaheadInput">
+                  on-px-typeahead-item-selected="_handleTypeaheadItemSelected">
                 </px-typeahead>
               </div>
             </div>
@@ -347,13 +346,6 @@ Creates inputs for configuration props.
     _handleTypeaheadItemSelected: function(evt) {
       this._syncToProp(evt.target.prop, evt.detail);
     },
-    /**
-     * Binds a typeahead input event to the prop.value it should change.
-     */
-    _handleTypeaheadInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.detail.srcElement.value);
-    },
-
     /**
      * Binds to a click on a code edit button.
      */
