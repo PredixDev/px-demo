@@ -39,7 +39,7 @@ Creates inputs for configuration props.
             <div class="flex flex--justify u-mb-">
               <div>{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
-                <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" on-change="_handleToggleInput">
+                <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-change="_handleToggleInput">
                 <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small"></label>
               </div>
             </div>
@@ -52,7 +52,7 @@ Creates inputs for configuration props.
           <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
             <div class="u-mb-">
               <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-              <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleTextInput" />
+              <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-input="_handleTextInput" />
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
               <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
@@ -63,7 +63,7 @@ Creates inputs for configuration props.
           <template is="dom-if" if="{{_itIs(item.inputType, 'number')}}">
             <div class="u-mb-">
               <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-              <input id="text-{{item.prop}}" class="text-input u-mb--" type="number" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" on-input="_handleNumberInput" />
+              <input id="text-{{item.prop}}" class="text-input u-mb--" type="number" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-input="_handleNumberInput" />
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
               <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
@@ -75,7 +75,7 @@ Creates inputs for configuration props.
             <div class="u-mb-">
               <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div style="width: 100%;" class="u-mb--">
-                <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" on-px-dropdown-value-changed="_handleDropdownInput">
+                <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-px-dropdown-value-changed="_handleDropdownInput">
                   <px-dropdown-content items="{{item.inputChoices}}" prop="{{item.prop}}"></px-dropdown-content>
                 </px-dropdown>
               </div>
@@ -97,6 +97,7 @@ Creates inputs for configuration props.
                   placeholder="[[item.inputPlaceholder]]" 
                   input-value="{{item.value}}" 
                   prop="{{item.prop}}" 
+                  data-debounce="{{item.inputDebounce}}"
                   on-px-typeahead-item-selected="_handleTypeaheadItemSelected">
                 </px-typeahead>
               </div>
@@ -112,7 +113,7 @@ Creates inputs for configuration props.
               <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div class="flex flex--row">
                 <input id="text-{{item.prop}}" class="text-input flex__item u-mb--" type="text" placeholder="{{item.inputPlaceholder}}" value="{...}" prop="{{item.prop}}" on-input="_editComplexJSON" disabled />
-                <button class="btn u-ml-" type="button" prop="{{item.prop}}" input-type="{{item.inputType}}" on-tap="_handleCodeEditButton">Edit</button>
+                <button class="btn u-ml-" type="button" prop="{{item.prop}}" input-type="{{item.inputType}}" data-debounce="{{item.inputDebounce}}" on-tap="_handleCodeEditButton">Edit</button>
               </div>
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -317,34 +318,34 @@ Creates inputs for configuration props.
      * Binds a text input event to the prop.value it should change.
      */
     _handleTextInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.target.value);
+      this._syncToProp(evt.target.prop, evt.target.value, evt.target.dataDebounce);
     },
 
    /**
     * Binds a text input event to the prop.value it should change.
     */
     _handleNumberInput: function(evt) {
-      this._syncToProp(evt.target.prop, Number(evt.target.value));
+      this._syncToProp(evt.target.prop, Number(evt.target.value), evt.target.dataDebounce);
     },
 
     /**
      * Binds a toggle input event to the prop.value it should change.
      */
     _handleToggleInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.target.checked);
+      this._syncToProp(evt.target.prop, evt.target.checked, evt.target.dataDebounce);
     },
 
     /**
      * Binds a dropdown input event to the prop.value it should change.
      */
     _handleDropdownInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.detail.val);
+      this._syncToProp(evt.target.prop, evt.detail.val, evt.target.dataDebounce);
     },
     /**
      * Binds a typeahead selected event to the prop.value it should change.
      */
     _handleTypeaheadItemSelected: function(evt) {
-      this._syncToProp(evt.target.prop, evt.detail);
+      this._syncToProp(evt.target.prop, evt.detail, evt.target.dataDebounce);
     },
     /**
      * Binds to a click on a code edit button.
@@ -365,7 +366,7 @@ Creates inputs for configuration props.
           done: function(err, newContent) {
             if (newContent) {
               propVal;
-              this._syncToProp(Polymer.dom(evt).rootTarget.prop, newContent);
+              this._syncToProp(Polymer.dom(evt).rootTarget.prop, newContent, Polymer.dom(evt).rootTarget.dataDebounce);
             }
           }.bind(this)
         });
@@ -378,8 +379,15 @@ Creates inputs for configuration props.
      * @param {String} propName - Name of prop, will also be its key in `props` object
      * @param {Any} newVal - The updated value to set for the prop
      */
-    _syncToProp: function(propName, newVal) {
-      this.set('props.' + propName + '.value', newVal);
+    _syncToProp: function(propName, newVal, debounceValue) {
+      if(debounceValue) {
+        this.debounce('sync-props', function() {
+          this.set('props.' + propName + '.value', newVal);
+        }, debounceValue);
+      }
+      else {
+        this.set('props.' + propName + '.value', newVal);
+      }
     },
 
     /**
