@@ -1,3 +1,7 @@
+v1.5.3
+==========================
+* accessibility improvements
+
 v1.5.2
 ==========================
 * added ability to debounce inputs (#5)

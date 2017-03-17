@@ -39,8 +39,8 @@ Creates inputs for configuration props.
             <div class="flex flex--justify u-mb-">
               <div>{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
-                <input id="toggle-{{item.prop}}" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-change="_handleToggleInput">
-                <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small"></label>
+                <input id="toggle-{{item.prop}}" role="checkbox" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" aria-checked="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-change="_handleToggleInput">
+                <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small">{{_getFieldLabel(item)}}</label>
               </div>
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -51,7 +51,7 @@ Creates inputs for configuration props.
           <!-- INPUT: 'text'  -->
           <template is="dom-if" if="{{_itIs(item.inputType, 'text')}}">
             <div class="u-mb-">
-              <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <label for$="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <input id="text-{{item.prop}}" class="text-input u-mb--" type="text" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-input="_handleTextInput" />
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -62,7 +62,7 @@ Creates inputs for configuration props.
           <!-- INPUT: 'number'  -->
           <template is="dom-if" if="{{_itIs(item.inputType, 'number')}}">
             <div class="u-mb-">
-              <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <label for$="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <input id="text-{{item.prop}}" class="text-input u-mb--" type="number" placeholder="{{_getFieldPlaceholder(item)}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" value="{{item.value}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-input="_handleNumberInput" />
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -73,7 +73,7 @@ Creates inputs for configuration props.
           <!-- INPUT: 'dropdown'  -->
           <template is="dom-if" if="{{_itIs(item.inputType, 'dropdown')}}">
             <div class="u-mb-">
-              <label for="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <label for$="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div style="width: 100%;" class="u-mb--">
                 <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-px-dropdown-value-changed="_handleDropdownInput">
                   <px-dropdown-content items="{{item.inputChoices}}" prop="{{item.prop}}"></px-dropdown-content>
@@ -88,15 +88,15 @@ Creates inputs for configuration props.
           <!-- INPUT: 'typeahead'  -->
           <template is="dom-if" if="{{_itIs(item.inputType, 'typeahead')}}">
             <div class="u-mb-">
-              <label for="typeahead-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <label for$="typeahead-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div style="width: 100%;" class="u-mb--">
-                <px-typeahead 
-                  id="typeahead-{{item.prop}}"  
-                  local-candidates="{{item.inputLocalCandidates}}" 
-                  prefetch-url="{{item.inputPrefetchUrl}}" 
-                  placeholder="[[item.inputPlaceholder]]" 
-                  input-value="{{item.value}}" 
-                  prop="{{item.prop}}" 
+                <px-typeahead
+                  id="typeahead-{{item.prop}}"
+                  local-candidates="{{item.inputLocalCandidates}}"
+                  prefetch-url="{{item.inputPrefetchUrl}}"
+                  placeholder="[[item.inputPlaceholder]]"
+                  input-value="{{item.value}}"
+                  prop="{{item.prop}}"
                   data-debounce="{{item.inputDebounce}}"
                   on-px-typeahead-item-selected="_handleTypeaheadItemSelected">
                 </px-typeahead>
@@ -110,7 +110,7 @@ Creates inputs for configuration props.
           <!-- INPUT: 'javascriptCode'  -->
           <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'code:JavaScriptObject', 'code:JSON')}}">
             <div class="u-mb-">
-              <label for="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
+              <label for$="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div class="flex flex--row">
                 <input id="text-{{item.prop}}" class="text-input flex__item u-mb--" type="text" placeholder="{{item.inputPlaceholder}}" value="{...}" prop="{{item.prop}}" on-input="_editComplexJSON" disabled />
                 <button class="btn u-ml-" type="button" prop="{{item.prop}}" input-type="{{item.inputType}}" data-debounce="{{item.inputDebounce}}" on-tap="_handleCodeEditButton">Edit</button>
@@ -120,7 +120,7 @@ Creates inputs for configuration props.
               <p class="zeta demo-props__helper-text">{{item.inputHelpText}}</p>
             </template>
           </template>
-        
+
       </template>
     </template>
   </template>
