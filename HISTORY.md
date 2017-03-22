@@ -1,3 +1,7 @@
+v1.5.5
+==========================
+* update dependencies
+
 v1.5.4
 ==========================
 * accessibility improvements
