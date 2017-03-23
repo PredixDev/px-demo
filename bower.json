@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "main": [
     "px-demo.html"
   ],
@@ -24,7 +24,7 @@
   "dependencies": {
     "polymer": "^1.7.1",
     "px-theme": "^2.0.3",
-    "px-dropdown": "^2.2.3",
+    "px-dropdown": "^3.0.0",
     "px-demo-snippet": "^0.6.16",
     "px-api-viewer": "^0.3.0",
     "px-tabs": "^0.7.0",
