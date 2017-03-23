@@ -37,7 +37,7 @@ Creates inputs for configuration props.
           <!-- INPUT: 'toggle'  -->
           <template is="dom-if" if="{{_itIs(item.inputType, 'toggle')}}">
             <div class="flex flex--justify u-mb-">
-              <div>{{_getFieldLabel(item)}}</div>
+              <div aria-hidden="true">{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
                 <input id="toggle-{{item.prop}}" role="switch" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" aria-checked="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-change="_handleToggleInput">
                 <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small">{{_getFieldLabel(item)}}</label>
