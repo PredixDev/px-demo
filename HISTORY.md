@@ -1,3 +1,8 @@
+v1.5.10
+==========================
+* Fix JavaScript function scope errors for code editor converter callback to solve IE11 bug
+* Fix CSS visibility errors to ensure code editor shows up on IE11
+
 v1.5.9
 ==========================
 * Fix issue where configs could re-apply over input values and override them if two properties were set in a row. Now, instead of watching and _userConfigs path for a change, we only watch the object itself changing. Seems to still trigger all the right observers.

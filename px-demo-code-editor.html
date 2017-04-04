@@ -132,16 +132,13 @@ used to edit complex props.
 
       if (!conversionType) return;
 
+      var handleConvertDone = this._codeConverterDone.bind(this);
+
       // Fire the event the converter will use to convert the code
       this.fire('px-code-editor-converter-convert-to-string', {
         source: evt.detail.code,
         type: conversionType,
-        done: function(err, codeAsStr) {
-          var editor = this.$.codeEditor;
-          if (editor) {
-            this.$.codeEditor.set('content', codeAsStr);
-          }
-        }.bind(this)
+        done: handleConvertDone
       });
 
       // Make the editor visible
@@ -151,6 +148,13 @@ used to edit complex props.
       this._currentEditorDoneCallback = null;
       if (typeof evt.detail.done === 'function') {
         this._currentEditorDoneCallback = evt.detail.done;
+      }
+    },
+
+    _codeConverterDone: function(err, codeAsStr) {
+      var editor = this.$.codeEditor;
+      if (editor) {
+        editor.set('content', codeAsStr);
       }
     },
 

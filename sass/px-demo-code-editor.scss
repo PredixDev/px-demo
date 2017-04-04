@@ -56,7 +56,7 @@ $inuit-enable-btn--small : true;
   }
 }
 :host([enabled]) {
-  display: initial;
+  display: inherit;
   visibility: visible;
 
   px-code-editor {
