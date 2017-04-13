@@ -1,3 +1,7 @@
+v2.0.0-prerelease
+==========================
+* updated dependencies for design refresh
+
 v1.5.10
 ==========================
 * Fix JavaScript function scope errors for code editor converter callback to solve IE11 bug
