@@ -1,6 +1,7 @@
-v2.0.0-prerelease
+v2.0.0
 ==========================
 * updated dependencies for design refresh
+* removed unused code: px-input-group-design
 
 v1.5.10
 ==========================

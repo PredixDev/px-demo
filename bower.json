@@ -50,7 +50,6 @@
     "px-starter-kit-design": "^1.0.0",
     "px-calendar-picker": "^1.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
-    "px-buttons-design": "^2.0.0",
-    "px-input-group-design": "^2.0.0"
+    "px-buttons-design": "^2.0.0"
   }
 }
