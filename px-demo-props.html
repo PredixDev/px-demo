@@ -37,7 +37,7 @@ Creates inputs for configuration props.
           <!-- INPUT: 'toggle'  -->
           <template is="dom-if" if="{{_itIs(item.inputType, 'toggle')}}">
             <div class="flex flex--justify u-mb-">
-              <div aria-hidden="true">{{_getFieldLabel(item)}}</div>
+              <div class="label" aria-hidden="true">{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
                 <input id="toggle-{{item.prop}}" role="switch" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" aria-checked="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-change="_handleToggleInput">
                 <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small">{{_getFieldLabel(item)}}</label>
@@ -74,9 +74,8 @@ Creates inputs for configuration props.
           <template is="dom-if" if="{{_itIs(item.inputType, 'dropdown')}}">
             <div class="u-mb-">
               <label for$="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
-              <div style="width: 100%;" class="u-mb--">
-                <px-dropdown id="dropdown-{{item.prop}}" value="{{item.value::change}}" display-value="{{_getDropdownDisplayValue(item.value)}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-px-dropdown-value-changed="_handleDropdownInput">
-                  <px-dropdown-content items="{{item.inputChoices}}" prop="{{item.prop}}"></px-dropdown-content>
+              <div class="u-mb--">
+                <px-dropdown style="width: 100%;" id="dropdown-{{item.prop}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" items="{{item.inputChoices}}" select-by="val" selected="{{item.value}}" on-px-dropdown-selection-changed="_handleDropdownInput">
                 </px-dropdown>
               </div>
             </div>
@@ -339,7 +338,7 @@ Creates inputs for configuration props.
      * Binds a dropdown input event to the prop.value it should change.
      */
     _handleDropdownInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.detail.val, evt.target.dataDebounce);
+        this._syncToProp(evt.target.prop, evt.detail.val, evt.target.dataDebounce);
     },
     /**
      * Binds a typeahead selected event to the prop.value it should change.
