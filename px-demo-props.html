@@ -28,7 +28,11 @@ Creates inputs for configuration props.
 
 <dom-module id="px-demo-props">
   <template>
-    <style include="px-demo-styles"></style>
+    <style include="px-demo-styles">
+      :host {
+        width:100%;
+      }
+    </style>
       <template is="dom-if" if="{{_fields.length}}">
         <p class="epsilon u-mb+">Properties</p>
 
