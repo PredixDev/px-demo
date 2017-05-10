@@ -6,6 +6,7 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-dropdown/px-dropdown.html" />
 <link rel="import" href="../px-typeahead/px-typeahead.html" />
+<link rel="import" href="../px-toggle/px-toggle.html" />
 
 <!-- Import style module -->
 <link rel="import" href="css/px-demo-styles.html">
@@ -43,8 +44,7 @@ Creates inputs for configuration props.
             <div class="flex flex--justify u-mb-">
               <div class="label" aria-hidden="true">{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
-                <input id="toggle-{{item.prop}}" role="switch" class="toggle__input toggle__input--small " type="checkbox" checked="{{item.value::change}}" aria-checked="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-change="_handleToggleInput">
-                <label for$="toggle-{{item.prop}}" class$="{{_itIsDisabled(item.inputDisabled)}} toggle__label toggle__label--small">{{_getFieldLabel(item)}}</label>
+                <px-toggle id="toggle-{{item.prop}}" size="small" checked$="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-checked-changed="_handleToggleInput"></px-toggle>
               </div>
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">
@@ -335,7 +335,7 @@ Creates inputs for configuration props.
      * Binds a toggle input event to the prop.value it should change.
      */
     _handleToggleInput: function(evt) {
-      this._syncToProp(evt.target.prop, evt.target.checked, evt.target.dataDebounce);
+      this._syncToProp(evt.target.prop, evt.detail.value, evt.target.dataDebounce);
     },
 
     /**
