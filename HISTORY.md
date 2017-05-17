@@ -4,6 +4,7 @@ v2.0.0
 * removed unused code: px-input-group-design
 * updated to work with new dropdown api
 * cutover from px-toggle-design to px-toggle
+* added new icons
 
 v1.5.10
 ==========================
