@@ -1,3 +1,7 @@
+v1.5.11
+==========================
+* Rebuild to remove legacy flexbox
+
 v1.5.10
 ==========================
 * Fix JavaScript function scope errors for code editor converter callback to solve IE11 bug
