@@ -10,6 +10,7 @@
 <link rel="import" href="../px-demo-props.html" />
 <link rel="import" href="../px-demo-interactive.html" />
 <link rel="import" href="../px-demo-component-snippet.html" />
+<link rel="import" href="../px-demo-code-editor.html" />
 
 <!-- Imports for this componnent -->
 <link rel="import" href="../css/px-demo-styles.html" />
@@ -33,6 +34,9 @@
 
       <!-- Props -->
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Code Editor -->
+      <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
@@ -326,6 +330,11 @@
 
       test: {
         type: Object,
+        defaultValue: [
+          {name: 'sample'},
+          {name: 'sample 1'},
+          {name: 'sample 2'}
+        ],
         inputType: 'code:JSON'
       }
 

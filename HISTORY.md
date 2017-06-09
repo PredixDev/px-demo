@@ -1,3 +1,7 @@
+v1.5.12
+==========================
+* Updated demo to get code-editor working
+
 v1.5.11
 ==========================
 * Rebuild to remove legacy flexbox
