@@ -52,10 +52,9 @@ $inuit-enable-btn--tertiary : true;
 .demo-collection__header__text {
   @extend .caps;
   @extend .muted;
-  margin-right: $inuit-base-spacing-unit;
 }
 .demo-collection__header__selector {
-  padding-top: .13rem;
+  margin-top: 1rem;
 }
 .demo-props__helper-text {
   margin-top: ($inuit-base-spacing-unit--small * -1)!important;
