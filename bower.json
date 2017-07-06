@@ -23,7 +23,7 @@
     "wct.conf.json"
   ],
   "dependencies": {
-    "polymer": "^1.7.1",
+    "polymer": "^1.9.0",
     "px-theme": "^3.0.0",
     "px-dropdown": "^4.0.0",
     "px-demo-snippet": "^1.0.0",
@@ -31,7 +31,7 @@
     "px-tabs": "^1.0.0",
     "px-demo-design": "^2.0.0",
     "px-overlay": "^1.0.0",
-    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.6",
+    "iron-a11y-keys": "^2.0.0",
     "px-code-editor": "^2.0.0",
     "px-view-header": "^1.0.0",
     "px-deck-selector": "^2.0.0",
@@ -50,7 +50,7 @@
     "px-meta-lists-design": "^1.0.0",
     "px-starter-kit-design": "^1.0.0",
     "px-calendar-picker": "^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
+    "iron-demo-helpers": "^2.0.0",
     "px-buttons-design": "^2.0.0"
   }
 }
