@@ -52,5 +52,8 @@
     "px-calendar-picker": "^1.0.0",
     "iron-demo-helpers": "^2.0.0",
     "px-buttons-design": "^2.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^0.7.24"
   }
 }
