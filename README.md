@@ -1,8 +1,8 @@
-#px-demo
+# px-demo
 
 ## Overview
 
-px-demo is a Predix UI component
+Px-demo is used as a template to build the component demos. These demos live on predix-ui.com
 
 ## Usage
 
