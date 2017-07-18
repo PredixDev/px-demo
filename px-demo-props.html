@@ -449,19 +449,19 @@ Creates inputs for configuration props.
     _handleConfigUpdate: function(newConfig) {
       if (newConfig && Object.keys(newConfig).length) {
         if (newConfig.configShowProps && Array.isArray(newConfig.configShowProps)) {
-          this._setEachPropVisibily('showOnly', newConfig.configShowProps);
+          this._setEachPropVisibility('showOnly', newConfig.configShowProps);
         }
         else if (newConfig.configHideProps && Array.isArray(newConfig.configHideProps) && newConfig.configHideProps.length) {
-          this._setEachPropVisibily('hideOnly', newConfig.configHideProps);
+          this._setEachPropVisibility('hideOnly', newConfig.configHideProps);
         }
         else  {
-          this._setEachPropVisibily('showAll');
+          this._setEachPropVisibility('showAll');
         }
       }
     },
 
     /**
-     * Loops through all fields and shows/hides dependening on the configuration
+     * Loops through all fields and shows/hides depending on the configuration
      * of the function.
      *
      * If `behavior` is 'showOnly', hides everything except what is in `propList`.
@@ -471,7 +471,7 @@ Creates inputs for configuration props.
      * @param {String} behavior - How the function should show/hide things, choose from 'showOnly', 'hideOnly', 'showAll'
      * @param {Array} propList - Array of string-y names for each prop
      */
-    _setEachPropVisibily: function(behavior, propList) {
+    _setEachPropVisibility: function(behavior, propList) {
       var fields = this.get('_fields');
       var numberOfVisibleProps = 0;
       if (fields && fields.length) {
@@ -482,7 +482,7 @@ Creates inputs for configuration props.
           if (behavior === 'showOnly') shouldShowProp = (propList.indexOf(propName) !== -1);
           // If hideOnly, set shouldShow to `true` if prop is not in list
           if (behavior === 'hideOnly') shouldShowProp = (propList.indexOf(propName) === -1);
-          // If showAll, show all the prosp
+          // If showAll, show all the props
           if (behavior === 'showAll') shouldShowProp = true;
 
           if (shouldShowProp === true) {
