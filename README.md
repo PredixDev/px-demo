@@ -2,7 +2,7 @@
 
 ## Overview
 
-`Px-demo` is a Predix UI component used as a template to build the component demo pages. These demos live on predix-ui.com.
+`Px-demo` is a Predix UI component used as a template to build the component demo pages. These demos live on [predix-ui.com](https://www.predix-ui.com/).
 
 ## Usage
 
