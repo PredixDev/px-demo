@@ -1,3 +1,7 @@
+v2.0.1
+==========================
+* Open links in footer in new tab/window with target="_blank". Without this the links will break if they are inside an iFrame.
+
 v2.0.0
 ==========================
 * updated dependencies for design refresh
