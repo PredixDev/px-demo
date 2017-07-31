@@ -44,7 +44,7 @@ Creates inputs for configuration props.
             <div class="flex flex--justify u-mb-">
               <div class="label" aria-hidden="true">{{_getFieldLabel(item)}}</div>
               <div class="u-ml-">
-                <px-toggle id="toggle-{{item.prop}}" size="small" checked$="{{item.value::change}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" on-checked-changed="_handleToggleInput"></px-toggle>
+                <px-toggle id="toggle-{{item.prop}}" size="small" checked$="{{item.value::change}}" prop="{{item.prop}}" disabled$="{{_itIsTrue(item.inputDisabled)}}" data-debounce="{{item.inputDebounce}}" on-checked-changed="_handleToggleInput"></px-toggle>
               </div>
             </div>
             <template is="dom-if" if="{{item.inputHelpText}}">

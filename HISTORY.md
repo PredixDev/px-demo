@@ -1,3 +1,7 @@
+v2.0.3
+==========================
+* add ability to disable toggles
+
 v2.0.2
 ==========================
 * update GE link
