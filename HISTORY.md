@@ -1,3 +1,7 @@
+v2.0.4
+==========================
+* fix monogram wordmark for all browsers
+
 v2.0.3
 ==========================
 * add ability to disable toggles
