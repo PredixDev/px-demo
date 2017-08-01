@@ -79,7 +79,7 @@ Creates inputs for configuration props.
             <div class="u-mb-">
               <label for$="dropdown-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div class="u-mb--">
-                <px-dropdown style="width: 100%;" id="dropdown-{{item.prop}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" items="{{item.inputChoices}}" select-by="val" selected="{{item.value}}" on-px-dropdown-selection-changed="_handleDropdownInput">
+                <px-dropdown style="width: 100%;" id="dropdown-{{item.prop}}" prop="{{item.prop}}" data-debounce="{{item.inputDebounce}}" items="{{item.inputChoices}}" select-by="val" selected="{{item.value}}" on-px-dropdown-selection-changed="_handleDropdownInput" disable-clear>
                 </px-dropdown>
               </div>
             </div>

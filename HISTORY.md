@@ -1,3 +1,7 @@
+v2.0.5
+==========================
+* disable clearing of prop dropdown
+
 v2.0.4
 ==========================
 * fix monogram wordmark for all browsers
