@@ -2,6 +2,10 @@ v2.1.0
 ==========================
 * Adding suppressPropertyValues property
 
+v2.0.6
+==========================
+* rebuild sass to pick up button style fix for chrome canary
+
 v2.0.5
 ==========================
 * disable clearing of prop dropdown
