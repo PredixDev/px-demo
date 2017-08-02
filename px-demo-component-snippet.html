@@ -32,7 +32,8 @@ Wraps around `px-demo-snippet` to show code sample.
         links-includes="[[linksIncludes]]"
         scripts-includes="[[scriptsIncludes]]"
         polygit-includes="[[polygitIncludes]]"
-        code-link="[[codepenLink]]">
+        code-link="[[codepenLink]]"
+        suppress-property-values="[[suppressPropertyValues]]">
     </px-demo-snippet>
   </template>
 </dom-module>
@@ -109,6 +110,11 @@ Wraps around `px-demo-snippet` to show code sample.
       _shallowProps: {
         type: Object,
         value: function(){ return {}; }
+      },
+
+      suppressPropertyValues: {
+        type: Array,
+        value: function() { return []; }
       }
     },
 
