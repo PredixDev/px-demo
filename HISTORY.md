@@ -1,3 +1,7 @@
+v2.0.7
+==========================
+* add new theme switcher helper to work inside iframes
+
 v2.0.6
 ==========================
 * rebuild sass to pick up button style fix for chrome canary
