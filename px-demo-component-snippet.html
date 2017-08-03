@@ -33,7 +33,8 @@ Wraps around `px-demo-snippet` to show code sample.
         scripts-includes="[[scriptsIncludes]]"
         polygit-includes="[[polygitIncludes]]"
         code-link="[[codepenLink]]"
-        suppress-property-values="[[suppressPropertyValues]]">
+        suppress-property-values="[[suppressPropertyValues]]"
+        no-indentation="[[noIndentation]]">
     </px-demo-snippet>
   </template>
 </dom-module>
@@ -115,6 +116,11 @@ Wraps around `px-demo-snippet` to show code sample.
       suppressPropertyValues: {
         type: Array,
         value: function() { return []; }
+      },
+
+      noIndentation: {
+        type: Boolean,
+        value: false
       }
     },
 

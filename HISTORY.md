@@ -1,3 +1,7 @@
+v2.2.0
+==========================
+* Added noIndentation prop to turn off the demo snippet indentation
+
 v2.1.2
 ==========================
 * fix shields.io url for GH issues
