@@ -1,3 +1,7 @@
+v2.1.1
+==========================
+* updated css to pick up new forms-design change
+
 v2.1.0
 ==========================
 * Adding suppressPropertyValues property
