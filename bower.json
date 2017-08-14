@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "main": [
     "px-demo.html"
   ],
@@ -28,7 +28,7 @@
     "px-dropdown": "^4.0.0",
     "px-demo-snippet": "^1.0.0",
     "px-api-viewer": "^1.0.0",
-    "px-tabs": "^1.0.0",
+    "px-tabs": "^2.0.0",
     "px-demo-design": "^2.0.0",
     "px-overlay": "^1.0.0",
     "iron-a11y-keys": "^2.0.0",

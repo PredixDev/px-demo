@@ -4,7 +4,7 @@
     'gulp serve' (or similar server setup) to enable correct finding of5 bower dependencies for local runs.
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-tabs/px-tab-set.html" />
+<link rel="import" href="../px-tabs/px-tabs.html" />
 
 <!-- Import style module -->
 <link rel="import" href="css/px-demo-styles.html">
@@ -32,11 +32,11 @@ configurable options.
     <style include="px-demo-styles"></style>
 
     <template is="dom-if" if="_hasConfigs(configs)">
-      <px-tab-set selected="{{_selectedTab}}" bare no-bottom-border>
+      <px-tabs selected="{{_selectedTab}}" bare no-bottom-border>
         <template is="dom-repeat" items="{{_userConfigs}}">
           <px-tab>{{_findConfigName(item, index)}}</px-tab>
         </template>
-      </px-tab-set>
+      </px-tabs>
     </template>
 
   </template>
