@@ -1,3 +1,7 @@
+v2.3.0
+==========================
+* Add ability to configure api source file and element name
+
 v2.2.1
 ==========================
 * Pick up new px-tabs version and API
