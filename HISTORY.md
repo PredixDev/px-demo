@@ -1,3 +1,7 @@
+v2.3.1
+==========================
+* Updated footer styles
+
 v2.3.0
 ==========================
 * Add ability to configure api source file and element name
