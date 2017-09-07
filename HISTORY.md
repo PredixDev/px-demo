@@ -1,3 +1,7 @@
+v2.3.2
+==========================
+* Updated properties layout, added scrolling
+
 v2.3.1
 ==========================
 * Updated footer styles

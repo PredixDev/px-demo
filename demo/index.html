@@ -40,12 +40,12 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p class=u-mb0>Event fired: <strong>px-calendar-selected</strong></p>
+          <p class="u-mb0 u-mt0">Event fired: <strong>px-calendar-selected</strong></p>
           <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p class=u-mb0>Event fired: <strong>px-calendar-range-selected</strong></p>
+          <p class="u-mb0 u-mt0">Event fired: <strong>px-calendar-range-selected</strong></p>
           <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
@@ -329,6 +329,33 @@
       },
 
       test: {
+        type: Object,
+        defaultValue: [
+          {name: 'sample'},
+          {name: 'sample 1'},
+          {name: 'sample 2'}
+        ],
+        inputType: 'code:JSON'
+      },
+      test1: {
+        type: Object,
+        defaultValue: [
+          {name: 'sample'},
+          {name: 'sample 1'},
+          {name: 'sample 2'}
+        ],
+        inputType: 'code:JSON'
+      },
+      test2: {
+        type: Object,
+        defaultValue: [
+          {name: 'sample'},
+          {name: 'sample 1'},
+          {name: 'sample 2'}
+        ],
+        inputType: 'code:JSON'
+      },
+      test3: {
         type: Object,
         defaultValue: [
           {name: 'sample'},

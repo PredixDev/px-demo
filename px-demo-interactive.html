@@ -40,14 +40,16 @@ Component container code for Predix UI demos.
       <article class="demo-container-flex [ u-ph++ u-pb++ ]">
 
         <!-- The demo properties go in here -->
-        <div class="flex demo-properties-container u-ph+ u-pb+ u-mt+" id="propsContainer">
-          <content select="px-demo-props"></content>
+        <div class="demo-properties-container">
+          <div id="propsContainer" class="demo-properties">
+            <content select="px-demo-props"></content>
+          </div>
         </div>
 
         <!-- The demo component and snippet go in here -->
-        <div class="flex flex--col demo-component-code-container u-mt+">
-          <div class="flex__item flex__item--msfix flex demo-component-container u-p+">
-            <content select="px-demo-component" class="flex"></content>
+        <div class="demo-component-code-container flex__item flex__item--msfix u-mt+">
+          <div class=" demo-component-container u-p++">
+            <content select="px-demo-component"></content>
           </div>
 
           <content select="px-demo-component-snippet"></content>
