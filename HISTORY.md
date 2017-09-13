@@ -1,3 +1,7 @@
+v2.3.3
+==========================
+* updated css to pick up properties panel to display full width change
+
 v2.3.2
 ==========================
 * Updated properties layout, added scrolling
