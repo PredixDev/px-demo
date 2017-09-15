@@ -1,3 +1,7 @@
+v2.3.4
+==========================
+* pass through `hide-codepen` for snippet
+
 v2.3.3
 ==========================
 * updated css to pick up properties panel to display full width change
