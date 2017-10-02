@@ -1,3 +1,7 @@
+v2.3.5
+==========================
+* calculate urls to avoid errors in safari
+
 v2.3.4
 ==========================
 * pass through `hide-codepen` for snippet
