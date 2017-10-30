@@ -1,3 +1,7 @@
+v3.0.0
+==========================
+* add indicators for device sizes
+
 v2.3.5
 ==========================
 * calculate urls to avoid errors in safari
