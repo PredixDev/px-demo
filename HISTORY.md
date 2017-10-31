@@ -1,4 +1,4 @@
-v3.0.0
+v2.4.0
 ==========================
 * add indicators for device sizes
 
