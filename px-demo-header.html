@@ -3,9 +3,9 @@
     siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
     'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
 -->
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-icon-set/px-icon-set.html"/>
-<link rel="import" href="../px-icon-set/px-icon.html"/>
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../px-icon-set/px-icon-set.html" />
+<link rel="import" href="../px-icon-set/px-icon.html" />
 
 <!-- Import style module -->
 <link rel="import" href="css/px-demo-styles.html">
@@ -40,9 +40,9 @@ Creates a header for Predix UI demo pages.
             </div>
             <template is="dom-if" if="{{!hideShields}}">
               <div class="flex u-mb">
-                <img class="u-mr--" src="{{_getShieldUrl(_shieldName,'Travis')}}" alt="Travis Status" onerror="this.style.display='none'" />
-                <img class="u-mr--" src="{{_getShieldUrl(_shieldName,'Bower')}}" alt="Bower Version" onerror="this.style.display='none'" />
-                <img class="u-mr--" src="{{_getShieldUrl(_shieldName,'GitHub')}}" alt="GitHub Issues Count" onerror="this.style.display='none'" />
+                <img class="u-mr--" src="https://img.shields.io/travis/PredixDev/{{_shieldName}}/master.svg?style=flat-square" alt="Travis Status" onerror="this.style.display='none'"/>
+                <img class="u-mr--" src="https://img.shields.io/bower/v/{{_shieldName}}.svg?style=flat-square" alt="Bower Version" onerror="this.style.display='none'"/>
+                <img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/{{_shieldName}}.svg?style=flat-square" alt="GitHub Issues Count" onerror="this.style.display='none'"/>
               </div>
             </template>
             <div class="flex flex--row">
@@ -149,6 +149,36 @@ Creates a header for Predix UI demo pages.
       _shieldName: {
         type: String,
         computed: '_computeShieldName(moduleName, parentName)'
+      },
+      /**
+      * Whether the component is optimized for desktop.
+      * @property desktop
+      * @type {Boolean}
+      * @default false
+      */
+      desktop: {
+        type: Boolean,
+        value: false
+      },
+      /**
+      * Whether the component is optimized for tablet.
+      * @property tablet
+      * @type {Boolean}
+      * @default false
+      */
+      tablet: {
+        type: Boolean,
+        value: false
+      },
+      /**
+      * Whether the component is optimized for mobile.
+      * @property mobile
+      * @type {Boolean}
+      * @default false
+      */
+      mobile: {
+        type: Boolean,
+        value: false
       }
     },
 
@@ -160,7 +190,7 @@ Creates a header for Predix UI demo pages.
      * @param {string} parentName
      * @return {String}
      */
-    _computeShieldName: function(moduleName, parentName) {
+    _computeShieldName: function (moduleName, parentName) {
       if (moduleName && (typeof moduleName === 'string')) {
         parentName = parentName || '';
         return (parentName.length) ? parentName : moduleName;
