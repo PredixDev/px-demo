@@ -23,7 +23,7 @@
     "wct.conf.json"
   ],
   "dependencies": {
-    "polymer": "^2.0.0",
+    "polymer": "1.9 - 2",
     "px-theme": "^3.0.0",
     "px-dropdown": "polymer2.0-preview",
     "px-demo-snippet": "polymer2.0-preview",
@@ -55,7 +55,6 @@
   },
   "resolutions": {
     "webcomponentsjs": "^1.0.0",
-    "polymer": "1.9 - 2",
     "px-dropdown": "polymer2.0-preview",
     "px-icon-set": "polymer2.0-preview"
   },
