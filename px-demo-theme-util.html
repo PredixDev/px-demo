@@ -34,7 +34,7 @@
       // selector (all the color style vars are under this)
       var themeRootStyleRule = null;
       for (var i=0; i<themeCSSRules.length; i++) {
-        if (themeCSSRules[i].parsedSelector === ':host>*,html') {
+        if (themeCSSRules[i].parsedSelector === 'html') {
           themeRootStyleRule = themeCSSRules[i];
         }
       }
