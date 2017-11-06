@@ -28,12 +28,12 @@ Component container code for Predix UI demos.
 
     <!-- If a code editor instance was given, it will go outside everything
          because it appears as an overlay. -->
-    <content select="px-demo-code-editor"></content>
+    <slot name="px-demo-code-editor"></slot>
 
     <section class="demo-background--interactive">
       <!-- Tabs go above -->
       <div class="[ u-ph++ u-pt++ ]">
-        <content select="px-demo-configs"></content>
+        <slot name="px-demo-configs"></slot>
       </div>
 
       <!-- Wraps around all interactive -->
@@ -42,17 +42,17 @@ Component container code for Predix UI demos.
         <!-- The demo properties go in here -->
         <div class="demo-properties-container">
           <div id="propsContainer" class="demo-properties">
-            <content select="px-demo-props"></content>
+            <slot name="px-demo-props"></slot>
           </div>
         </div>
 
         <!-- The demo component and snippet go in here -->
         <div class="demo-component-code-container flex__item flex__item--msfix u-mt+">
           <div class=" demo-component-container u-p++">
-            <content select="px-demo-component"></content>
+            <slot name="px-demo-component"></slot>
           </div>
 
-          <content select="px-demo-component-snippet"></content>
+          <slot name="px-demo-component-snippet"></slot>
         </div>
 
       </article>
