@@ -34,7 +34,8 @@ Wraps around `px-demo-snippet` to show code sample.
         polygit-includes="[[polygitIncludes]]"
         code-link="[[codepenLink]]"
         suppress-property-values="[[suppressPropertyValues]]"
-        no-indentation="[[noIndentation]]">
+        no-indentation="[[noIndentation]]"
+        hide-codepen="[[hideCodepen]]">
     </px-demo-snippet>
   </template>
 </dom-module>
@@ -119,6 +120,10 @@ Wraps around `px-demo-snippet` to show code sample.
       },
 
       noIndentation: {
+        type: Boolean,
+        value: false
+      },
+      hideCodepen: {
         type: Boolean,
         value: false
       }

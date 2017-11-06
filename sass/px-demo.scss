@@ -69,6 +69,15 @@ $inuit-enable-btn--tertiary : true;
   min-width: $inuit-base-spacing-unit;
 }
 
+.demo-layout--center .device-icon {
+  --iron-icon-height: 1.3333rem;
+  --iron-icon-width: 1.3333rem;
+  stroke-width: 0.8;
+}
+.demo-layout--center .flex__item {
+  min-width: calculateRem(300px);
+}
+
 // Trumps
 $inuit-enable-margins : true;
 $inuit-enable-margins--tiny : true;

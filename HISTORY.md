@@ -2,6 +2,18 @@ v3.0.0
 ==========================
 * Migrate to Polymer 1.x/2.x hybrid component
 
+v2.4.0
+==========================
+* add indicators for device sizes
+
+v2.3.5
+==========================
+* calculate urls to avoid errors in safari
+
+v2.3.4
+==========================
+* pass through `hide-codepen` for snippet
+
 v2.3.3
 ==========================
 * updated css to pick up properties panel to display full width change
