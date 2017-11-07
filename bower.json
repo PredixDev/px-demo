@@ -27,7 +27,7 @@
     "px-theme": "^3.0.0",
     "px-dropdown": "polymer2.0-preview",
     "px-demo-snippet": "polymer2.0-preview",
-    "px-api-viewer": "polymer2.0-preview",
+    "px-api-viewer": "^2.0.0",
     "px-tabs": "polymer2.0-preview",
     "px-demo-design": "^2.0.0",
     "px-overlay": "polymer2.0-preview",
