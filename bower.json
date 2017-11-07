@@ -32,7 +32,7 @@
     "px-demo-design": "^2.0.0",
     "px-overlay": "polymer2.0-preview",
     "iron-a11y-keys": "^2.0.0",
-    "px-code-editor": "polymer2.0-preview",
+    "px-code-editor": "^3.0.0",
     "px-view-header": "polymer2.0-preview",
     "px-deck-selector": "^2.0.0",
     "px-typeahead": "polymer2.0-preview",
