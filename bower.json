@@ -36,7 +36,7 @@
     "px-view-header": "polymer2.0-preview",
     "px-deck-selector": "polymer2.0-preview",
     "px-typeahead": "polymer2.0-preview",
-    "px-toggle": "polymer2.0-preview"
+    "px-toggle": "^2.0.0"
   },
   "devDependencies": {
     "px-forms-design": "^2.0.0",
