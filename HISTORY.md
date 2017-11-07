@@ -1,3 +1,7 @@
+v3.0.1
+==========================
+* Update to released dependencies
+
 v3.0.0
 ==========================
 * Migrate to Polymer 1.x/2.x hybrid component
