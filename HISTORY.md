@@ -1,3 +1,7 @@
+v3.0.2
+==========================
+* fix demo sync for polymer 2
+
 v3.0.1
 ==========================
 * Update to released dependencies

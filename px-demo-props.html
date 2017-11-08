@@ -205,13 +205,15 @@ Creates inputs for configuration props.
      */
     _computeFields: function() {
       this.debounce('prepare-fields', function(){
-        var props = this.props;
-        var propKeys = Object.keys(props);
+        if(this.props !== undefined) {
+          var props = this.props;
+          var propKeys = Object.keys(props);
 
-        if (propKeys.length) {
-          for (var i = 0; i < propKeys.length; i++) {
-            this.push('_fields', Object.assign({}, { prop: propKeys[i], _visibleForConfig: true }, props[propKeys[i]]));
-            this.set('_fieldsIndex.'+propKeys[i], '#'+i);
+          if (propKeys.length) {
+            for (var i = 0; i < propKeys.length; i++) {
+              this.push('_fields', Object.assign({}, { prop: propKeys[i], _visibleForConfig: true }, props[propKeys[i]]));
+              this.set('_fieldsIndex.'+propKeys[i], i);
+            }
           }
         }
       }, 200);
