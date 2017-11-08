@@ -26,14 +26,14 @@
     "polymer": "1.9 - 2",
     "px-theme": "^3.0.0",
     "px-dropdown": "polymer2.0-preview",
-    "px-demo-snippet": "polymer2.0-preview",
+    "px-demo-snippet": "v1.0.0",
     "px-api-viewer": "^2.0.0",
     "px-tabs": "polymer2.0-preview",
     "px-demo-design": "^2.0.0",
-    "px-overlay": "polymer2.0-preview",
+    "px-overlay": "v1.0.0",
     "iron-a11y-keys": "^2.0.0",
     "px-code-editor": "^3.0.0",
-    "px-view-header": "polymer2.0-preview",
+    "px-view-header": "^1.0.0",
     "px-deck-selector": "^2.0.0",
     "px-typeahead": "polymer2.0-preview",
     "px-toggle": "^2.0.0"
@@ -41,7 +41,7 @@
   "devDependencies": {
     "px-forms-design": "^2.0.0",
     "px-tables-design": "^2.0.0",
-    "px-icon-set": "polymer2.0-preview",
+    "px-icon-set": "^2.0.0",
     "px-list-inline-design": "^1.0.0",
     "px-toggle-design": "^2.0.0",
     "px-headings-design": "^1.0.0",
@@ -54,9 +54,7 @@
     "web-component-tester": "^6.3.0"
   },
   "resolutions": {
-    "webcomponentsjs": "^1.0.0",
-    "px-dropdown": "polymer2.0-preview",
-    "px-icon-set": "polymer2.0-preview"
+    "webcomponentsjs": "^1.0.0"
   },
   "variants": {
     "1.x": {
