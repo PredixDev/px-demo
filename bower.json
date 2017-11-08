@@ -25,10 +25,10 @@
   "dependencies": {
     "polymer": "1.9 - 2",
     "px-theme": "^3.0.0",
-    "px-dropdown": "polymer2.0-preview",
+    "px-dropdown": "^4.0.0",
     "px-demo-snippet": "^1.0.0",
     "px-api-viewer": "^2.0.0",
-    "px-tabs": "polymer2.0-preview",
+    "px-tabs": "^2.0.0",
     "px-demo-design": "^2.0.0",
     "px-overlay": "^1.0.0",
     "iron-a11y-keys": "^2.0.0",
