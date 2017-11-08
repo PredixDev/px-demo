@@ -1,3 +1,7 @@
+v3.0.4
+==========================
+* fixing dependency versions
+
 v3.0.3
 ==========================
 * more dependency updates

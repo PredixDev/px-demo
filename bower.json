@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "main": [
     "px-demo.html"
   ],
@@ -26,11 +26,11 @@
     "polymer": "1.9 - 2",
     "px-theme": "^3.0.0",
     "px-dropdown": "polymer2.0-preview",
-    "px-demo-snippet": "v1.0.0",
+    "px-demo-snippet": "^1.0.0",
     "px-api-viewer": "^2.0.0",
     "px-tabs": "polymer2.0-preview",
     "px-demo-design": "^2.0.0",
-    "px-overlay": "v1.0.0",
+    "px-overlay": "^1.0.0",
     "iron-a11y-keys": "^2.0.0",
     "px-code-editor": "^3.0.0",
     "px-view-header": "^1.0.0",
