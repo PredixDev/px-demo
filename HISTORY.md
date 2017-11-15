@@ -1,3 +1,7 @@
+v3.0.6
+==========================
+* Use the corresponding slot for <px-deck-selector
+
 v3.0.5
 ==========================
 * fixing dependency versions
