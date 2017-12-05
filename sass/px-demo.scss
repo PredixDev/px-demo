@@ -78,6 +78,24 @@ $inuit-enable-btn--tertiary : true;
   min-width: calculateRem(300px);
 }
 
+.demo-header__shield-badge-container {
+  height: calculateRem(20px);
+}
+
+.demo-header__badge-container__badge{
+  min-width: 80px;
+  transition: opacity .4s;
+  opacity: 0;
+}
+
+.demo-header__badge-container__badge--loaded{
+  opacity: 1;
+}
+
+.demo-configs-container{
+  min-height: calculateRem(63px);
+}
+
 // Trumps
 $inuit-enable-margins : true;
 $inuit-enable-margins--tiny : true;

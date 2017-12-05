@@ -39,10 +39,10 @@ Creates a header for Predix UI demo pages.
               <p>{{description}}</p>
             </div>
             <template is="dom-if" if="{{!hideShields}}">
-              <div class="flex u-mb">
-                <img class="u-mr--" src="{{_getShieldUrl(_shieldName,'Travis')}}" alt="Travis Status" onerror="this.style.display='none'" />
-                <img class="u-mr--" src="{{_getShieldUrl(_shieldName,'Bower')}}" alt="Bower Version" onerror="this.style.display='none'" />
-                <img class="u-mr--" src="{{_getShieldUrl(_shieldName,'GitHub')}}" alt="GitHub Issues Count" onerror="this.style.display='none'" />
+              <div class="flex u-mb demo-header__shield-badge-container">
+                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName,'Travis')}}" alt="Travis Status" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
+                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName,'Bower')}}" alt="Bower Version" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
+                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName,'GitHub')}}" alt="GitHub Issues Count" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
               </div>
             </template>
             <div class="flex flex--row">
@@ -208,6 +208,10 @@ Creates a header for Predix UI demo pages.
           return 'https://img.shields.io/github/issues-raw/PredixDev/' + shield + '.svg?style=flat-square';
         }
       }
+    },
+    _shieldImgLoaded: function(evt){
+      evt = Polymer.dom(evt);
+      this.toggleClass('demo-header__badge-container__badge--loaded', true, evt.localTarget);
     }
   });
 </script>

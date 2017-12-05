@@ -1,3 +1,7 @@
+v3.0.7
+==========================
+* Fix initial load heights of shield badges and tab area.
+
 v3.0.6
 ==========================
 * Use the corresponding slot for <px-deck-selector
