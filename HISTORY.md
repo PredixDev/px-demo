@@ -1,10 +1,14 @@
+v3.0.8
+==========================
+* change GH links to work in Canary
+
 v3.0.7
 ==========================
 * Fix initial load heights of shield badges and tab area.
 
 v3.0.6
 ==========================
-* Use the corresponding slot for <px-deck-selector
+* Use the corresponding slot for px-deck-selector
 
 v3.0.5
 ==========================
