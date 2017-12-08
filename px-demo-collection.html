@@ -34,7 +34,7 @@ Creates a container for a collection of demos.
           <a id="left" class="actionable caps" on-tap="_handleBackToInitial">&lt; back to {{demos.0.name}}</a>
         </template>
         -->
-        <div id="left" class="flex flex--row" slot="px-deck-selector">
+        <div id="left" slot="left" class="flex flex--row">
           <p class="demo-collection__header__text">View Children:</p>
           <px-deck-selector class="demo-collection__header__selector" decks="{{_decks}}" selected-deck="{{_selectedDeck}}"></px-deck-selector>
         </div>

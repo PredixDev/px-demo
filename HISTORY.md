@@ -1,3 +1,7 @@
+v3.0.9
+==========================
+* use hybrid version of px-view-header
+
 v3.0.8
 ==========================
 * change GH links to work in Canary
