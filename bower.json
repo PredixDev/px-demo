@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "main": [
     "px-demo.html"
   ],
@@ -33,7 +33,7 @@
     "px-overlay": "^1.0.0",
     "iron-a11y-keys": "^2.0.0",
     "px-code-editor": "^3.0.0",
-    "px-view-header": "^1.0.0",
+    "px-view-header": "^2.0.0",
     "px-deck-selector": "^2.0.0",
     "px-typeahead": "^2.0.0",
     "px-toggle": "^2.0.0"
