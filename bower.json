@@ -36,7 +36,8 @@
     "px-view-header": "^2.0.0",
     "px-deck-selector": "^2.0.0",
     "px-typeahead": "^2.0.0",
-    "px-toggle": "^2.0.0"
+    "px-toggle": "^2.0.0",
+    "px-app-helpers": "^2.1.0"
   },
   "devDependencies": {
     "px-forms-design": "^2.0.0",
