@@ -1,3 +1,7 @@
+v3.0.10
+==========================
+* Fix code editor bug in Polymer 2
+
 v3.0.9
 ==========================
 * use hybrid version of px-view-header
