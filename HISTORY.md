@@ -1,3 +1,7 @@
+v3.0.11
+==========================
+* Make sure Object.assign polyfill is loaded
+
 v3.0.10
 ==========================
 * Fix code editor bug in Polymer 2
