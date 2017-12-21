@@ -1,3 +1,7 @@
+v3.0.12
+==========================
+* Updates to use new version of px-code-editor
+
 v3.0.11
 ==========================
 * Make sure Object.assign polyfill is loaded
