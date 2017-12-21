@@ -1,3 +1,7 @@
+v3.0.13
+==========================
+* Add EvaluatedJavaScript code editor for demo props
+
 v3.0.12
 ==========================
 * Updates to use new version of px-code-editor
