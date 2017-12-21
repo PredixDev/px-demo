@@ -115,13 +115,8 @@ used to edit complex props.
             code = beautifyJavaScript(JSON.stringify(value));
           } catch (e) {}
         }
-        if (mode === 'code:JavaScriptObject') {
-          if (Array.isArray(value)) {
-            code = beautifyJavaScript(stringifyJavaScriptArray(value));
-          }
-          else {
-            code = beautifyJavaScript(stringifyJavaScriptObject(value));
-          }
+        if (mode === 'code:EvaluatedJavaScript') {
+          code = stringifyJavaScript(value);
         }
 
         this._code = code;
@@ -134,8 +129,11 @@ used to edit complex props.
       _handleEditorSaved: function(evt) {
         if (this._editorSaveCallback && this._codeType) {
           let parsedCode = '';
-          if (this._codeType === 'code:JSON' || this._codeType === 'code:JavaScriptObject')  {
+          if (this._codeType === 'code:JSON')  {
             parsedCode = parseStringToJavaScript(this.$.editor.value);
+          }
+          if (this._codeType === 'code:EvaluatedJavaScript') {
+            parsedCode = dangerousEvalToJavaScript(this.$.editor.value);
           }
           this._editorSaveCallback(parsedCode);
           this._code = null;
@@ -152,6 +150,23 @@ used to edit complex props.
         this.enabled = false;
       }
     });
+
+    function beautifyJavaScript(str) {
+      return js_beautify(str);
+    };
+
+    function stringifyJavaScriptArray(arr) {
+      if (Array.isArray(arr)) {
+        if (arr.length === 0) return '[]';
+        const parsedEntries = arr.map(a => {
+          if (Array.isArray(a)) {
+            return stringifyJavaScriptArray(a);
+          }
+          return stringifyJavaScriptObject(a);
+        }).join(',');
+        return `[${parsedEntries}]`;
+      }
+    };
 
     function stringifyJavaScriptObject(obj) {
       const keys = Object.keys(obj);
@@ -181,34 +196,18 @@ used to edit complex props.
       return str;
     };
 
-    function stringifyJavaScriptArray(arr) {
-      if (Array.isArray(arr)) {
-        if (arr.length === 0) return '[]';
-        const parsedEntries = arr.map(a => {
-          if (Array.isArray(a)) {
-            return stringifyJavaScriptArray(a);
-          }
-          return stringifyJavaScriptObject(a);
-        }).join(',');
-        return `[${parsedEntries}]`;
+    function stringifyJavaScript(o) {
+      if (Array.isArray(o)) {
+        return stringifyJavaScriptArray(o);
       }
+      if (o && typeof o === 'object') {
+        return stringifyJavaScriptObject(o);
+      }
+      return o + '';
     };
 
-    function parseStringToJavaScript(str) {
-      let parsed;
-      // First, try a JSON.parse()
-      try {
-        parsed = JSON.parse(str);
-      }
-      // Fall back to eval
-      catch (err) {
-        parsed = eval(str);
-      }
-      return parsed || '';
-    };
-
-    function beautifyJavaScript(str) {
-      return js_beautify(str);
+    function dangerousEvalToJavaScript(str) {
+      return eval('(function() { return ' + str + ' })()');
     };
   })();
 </script>

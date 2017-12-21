@@ -112,7 +112,7 @@ Creates inputs for configuration props.
           </template>
 
           <!-- INPUT: 'javascriptCode'  -->
-          <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'code:JavaScriptObject', 'code:JSON')}}">
+          <template is="dom-if" if="{{_itIsOneOf(item.inputType, 'code:EvaluatedJavaScript', 'code:JSON')}}">
             <div class="u-mb-">
               <label for$="text-{{item.prop}}">{{_getFieldLabel(item)}}</label>
               <div class="flex flex--row">
