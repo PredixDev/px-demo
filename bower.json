@@ -1,6 +1,6 @@
 {
   "name": "px-demo",
-  "version": "3.0.11",
+  "version": "3.0.14",
   "main": [
     "px-demo.html"
   ],
@@ -32,11 +32,14 @@
     "px-demo-design": "^2.0.0",
     "px-overlay": "^1.0.0",
     "iron-a11y-keys": "^2.0.0",
-    "px-code-editor": "^3.0.0",
+    "px-code-editor": "^4.0.0",
     "px-view-header": "^2.0.0",
     "px-deck-selector": "^2.0.0",
     "px-typeahead": "^2.0.0",
-    "px-toggle": "^2.0.0"
+    "px-toggle": "^2.0.0",
+    "px-app-helpers": "^2.1.0",
+    "px-modal": "^3.0.0",
+    "js-beautify": "beautify-web/js-beautify#^1.7.5"
   },
   "devDependencies": {
     "px-forms-design": "^2.0.0",

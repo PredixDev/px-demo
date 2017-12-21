@@ -1,6 +1,18 @@
+v3.0.14
+==========================
+* Re-add function to parse plain old JSON to string
+
+v3.0.13
+==========================
+* Add EvaluatedJavaScript code editor for demo props
+
+v3.0.12
+==========================
+* Updates to use new version of px-code-editor
+
 v3.0.11
 ==========================
-* remove unused scss/css file.
+* Make sure Object.assign polyfill is loaded
 
 v3.0.10
 ==========================
