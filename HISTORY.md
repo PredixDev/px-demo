@@ -1,3 +1,7 @@
+v3.0.11
+==========================
+* remove unused scss/css file.
+
 v3.0.10
 ==========================
 * Fix code editor bug in Polymer 2
