@@ -1,3 +1,7 @@
+v3.0.15
+==========================
+* remove unused scss/css file.
+
 v3.0.14
 ==========================
 * Re-add function to parse plain old JSON to string
