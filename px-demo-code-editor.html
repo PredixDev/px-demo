@@ -1,17 +1,7 @@
-<!--
-    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
-    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
-    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
--->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-code-editor/px-code-editor.html">
-<link rel="import" href="../px-code-editor/px-code-editor-converter.html">
-<link rel="import" href="../px-overlay/px-overlay.html">
-<link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
-
-<!-- Import style module -->
-<link rel="import" href="css/px-demo-styles.html">
-<link rel="import" href="css/px-demo-code-editor-styles.html">
+<link rel="import" href="../px-code-editor/px-code-editor.html"/>
+<link rel="import" href="../px-modal/px-modal.html"/>
+<link rel="import" href="beautify-import.html"/>
 
 <!--
 Wraps around `px-code-editor` to provide a code editor instance that can be
@@ -29,208 +19,196 @@ used to edit complex props.
 
 <dom-module id="px-demo-code-editor">
   <template>
-    <style include="px-demo-styles"></style>
-    <style include="px-demo-code-editor-styles"></style>
+    <style>
+      .code-editor {
+        width: 800px;
+        height: 500px;
+      }
+      .code-editor-container {
+        padding-bottom: 1rem;
+      }
+    </style>
 
-    <!-- Bind to `esc` keypress on window to dismiss active editor -->
-    <template is="dom-if" if="[[enabled]]">
-      <iron-a11y-keys target="[[_escapeTargetNode]]" keys="esc" on-keys-pressed="_handleEscKeypress"></iron-a11y-keys>
-    </template>
-
-    <!-- Code converter instance -->
-    <px-code-editor-converter id="converter" enable-eval></px-code-editor-converter>
-
-    <div class="demo-code-editor [ flex flex--col ]">
-      <div class="demo-code-editor__wrapper [ flex__item flex flex--col ]">
-        <div class="demo-code-editor__header">
-          <h4>{{title}}</h4>
-        </div>
-        <div class="demo-code-editor__body [ flex__item flex flex--col ]">
-          <px-code-editor
-              id="codeEditor"
-              disable-linter
-              enable-beautify
-              enable-save-to-update
-              flex-to-size
-              content="var foo = 'bar';">
-          </px-code-editor>
-        </div>
+    <px-modal
+        header-text="[[title]]"
+        accept-text="Save"
+        reject-text="Cancel"
+        opened="{{enabled}}"
+        on-px-modal-accepted="_handleEditorSaved"
+        on-px-modal-rejected="_handleEditorCanceled"
+        on-px-modal-dismissed="_handleEditorCanceled">
+      <div slot="body" class="code-editor-container">
+        <px-code-editor id="editor" class="code-editor" mode="javascript" value="[[_code]]"></px-code-editor>
       </div>
-    </div>
-    <px-overlay type="dark"></px-overlay>
+    </px-modal>
   </template>
 </dom-module>
 
 <script>
-  Polymer({
-    is: 'px-demo-code-editor',
+  (() => {
+    Polymer({
+      is: 'px-demo-code-editor',
 
-    properties: {
+      properties: {
+        /**
+         * Makes the editor visible to the user.
+         */
+        enabled: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true,
+          notify: true
+        },
 
-      /**
-       * Makes the editor instance visible to the user.
-       *
-       * @type {Boolean}
-       * @default false
-       */
-      enabled: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true,
-        observer: '_lockScrolling'
-      },
+        /**
+         * Title to show over the top of the editor.
+         */
+        title: {
+          type: String,
+          value: ''
+        },
 
-      /**
-       * The title to show over the top of the editor.
-       *
-       * @type {String}
-       */
-      title: {
-        type: String,
-        value: 'Property Editor: Dynamic Menu Config'
-      },
-
-      /**
-       * Returns a reference to `document` to bind to for identifying and
-       * handling an escape keypress.
-       *
-       * @type {String}
-       */
-      _escapeTargetNode: {
-        value: function() {
-          return document.querySelector('body');
+        /**
+         * The element to attach the `px-demo-props-code-edit-request` event
+         * listener to. Defaults to this element's parent node.
+         */
+        target: {
+          type: HTMLElement,
+          observer: '_bindTargetListener'
         }
+      },
+
+      created: function() {
+        this._handleEditRequest = this._handleEditRequest.bind(this);
+      },
+
+      attached: function() {
+        if (!this.target) {
+          this.target = this.parentNode;
+        }
+      },
+
+      detached: function() {
+        this.target = null;
+      },
+
+      _bindTargetListener(target, oldTarget) {
+        if (oldTarget) {
+          oldTarget.removeEventListener('px-demo-props-code-edit-request', this._handleEditRequest);
+        }
+        if (target) {
+          target.addEventListener('px-demo-props-code-edit-request', this._handleEditRequest)
+        }
+      },
+
+      /**
+       * When another element requests an editor instance, configure the instance
+       * and make it visible.
+       */
+      _handleEditRequest: function(evt) {
+        const {value, mode, title, save} = evt.detail;
+
+        // Convert code
+        let code = '';
+        if (mode === 'code:JSON') {
+          try {
+            code = beautifyJavaScript(JSON.stringify(value));
+          } catch (e) {}
+        }
+        if (mode === 'code:JavaScriptObject') {
+          if (Array.isArray(value)) {
+            code = beautifyJavaScript(stringifyJavaScriptArray(value));
+          }
+          else {
+            code = beautifyJavaScript(stringifyJavaScriptObject(value));
+          }
+        }
+
+        this._code = code;
+        this._codeType = mode;
+        this._editorSaveCallback = save;
+        this.title = title;
+        this.enabled = true;
+      },
+
+      _handleEditorSaved: function(evt) {
+        if (this._editorSaveCallback && this._codeType) {
+          let parsedCode = '';
+          if (this._codeType === 'code:JSON' || this._codeType === 'code:JavaScriptObject')  {
+            parsedCode = parseStringToJavaScript(this.$.editor.value);
+          }
+          this._editorSaveCallback(parsedCode);
+          this._code = null;
+          this._codeType = null;
+          this._editorSaveCallback = null;
+          this.enabled = false;
+        }
+      },
+
+      _handleEditorCanceled: function(evt) {
+        this._code = null;
+        this._codeType = null;
+        this._editorSaveCallback = null;
+        this.enabled = false;
       }
-    },
+    });
 
-    listeners: {
-      'px-code-editor-reset-action' : '_handleEditorReset',
-      'px-code-editor-save-action' : '_handleEditorSave',
-    },
+    function stringifyJavaScriptObject(obj) {
+      const keys = Object.keys(obj);
+      let str = '';
+      str += '{';
+      for (var i = 0; i < keys.length; i++) {
+        let key = keys[i];
+        let val = obj[key];
+        str += key + ':';
 
-    attached: function() {
-      this.listen(document, 'px-demo-props-code-edit-request', '_handleEditRequest');
-    },
+        if (typeof val === 'function') {
+          str += val.toString();
+        }
+        else if (Array.isArray(val)) {
+          str += stringifyJavaScriptArray(val);
+        }
+        else if (typeof val === 'object') {
+          str += stringifyJavaScriptObject(val);
+        }
+        else {
+          str += JSON.stringify(val);
+        }
 
-    detached: function() {
-      this.unlisten(document, 'px-demo-props-code-edit-request', '_handleEditRequest');
-    },
-
-    /**
-     * When another element requests an editor instance, configure the instance
-     * and make it visible.
-     */
-    _handleEditRequest: function(evt) {
-      // Set the necessary local properties
-      this.set('title', evt.detail.editorTitle);
-
-      // Determine what kind of request to send to the converter
-      var conversionType;
-      if (evt.detail.editorType === 'code:JSON') conversionType = 'simpleJSON';
-      if (evt.detail.editorType === 'code:JavaScriptObject') conversionType = 'complexRawObject';
-      if (evt.detail.editorType === 'code:JavaScriptObject' && Array.isArray(evt.detail.code)) conversionType = 'complexRawArray';
-
-      if (!conversionType) return;
-
-      var handleConvertDone = this._codeConverterDone.bind(this);
-
-      // Fire the event the converter will use to convert the code
-      this.fire('px-code-editor-converter-convert-to-string', {
-        source: evt.detail.code,
-        type: conversionType,
-        done: handleConvertDone
-      });
-
-      // Make the editor visible
-      this.set('enabled', true);
-
-      // Save the `evt.detail.done` function for later use
-      this._currentEditorDoneCallback = null;
-      if (typeof evt.detail.done === 'function') {
-        this._currentEditorDoneCallback = evt.detail.done;
+        if (i !== (keys.length - 1)) str += ',';
       }
-    },
+      str += '}';
+      return str;
+    };
 
-    _codeConverterDone: function(err, codeAsStr) {
-      var editor = this.$.codeEditor;
-      if (editor) {
-        editor.set('content', codeAsStr);
+    function stringifyJavaScriptArray(arr) {
+      if (Array.isArray(arr)) {
+        if (arr.length === 0) return '[]';
+        const parsedEntries = arr.map(a => {
+          if (Array.isArray(a)) {
+            return stringifyJavaScriptArray(a);
+          }
+          return stringifyJavaScriptObject(a);
+        }).join(',');
+        return `[${parsedEntries}]`;
       }
-    },
+    };
 
-    /**
-     * Searches a stringified constructor function for the native type and returns
-     * it as a simple string.
-     *
-     * @example
-     *
-     * var typeOf = Object;
-     * var typeOfConstructor = typeof.toString();
-     * _findType(typeOfConstructor); // => 'Object'
-     *
-     * @param {String} constructorStr - Stringified native constructor function
-     * @return {String}
-     */
-    _findType: function(constructorStr) {
-      var regex = /^function\s\b([a-zA-Z]+)\(\)/;
-      return regex.exec(constructorStr)[1] || undefined;
-    },
+    function parseStringToJavaScript(str) {
+      let parsed;
+      // First, try a JSON.parse()
+      try {
+        parsed = JSON.parse(str);
+      }
+      // Fall back to eval
+      catch (err) {
+        parsed = eval(str);
+      }
+      return parsed || '';
+    };
 
-    /**
-     * When the status of `enabled` changes, attempt to lock or unlock scrolling
-     * on the document.
-     *
-     * @param {Boolean} isEnabled
-     */
-    _lockScrolling: function(isEnabled) {
-      // Lock scrolling
-      if (isEnabled && isEnabled === true) {
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-      }
-      // Unlock scrolling
-      if (isEnabled === false) {
-        document.body.style.overflow = 'auto';
-        document.documentElement.style.overflow = 'auto';
-      }
-    },
-
-    /**
-     * When the reset button is tapped on the editor instance, hide the editor.
-     */
-    _handleEditorReset: function(evt) {
-      var status = this.get('enabled');
-      if (status) {
-        this.set('enabled', false);
-      }
-    },
-
-    /**
-     * When the save button is tapped, return the new code to the node that
-     * originally requested an editor, then hide the editor.
-     */
-    _handleEditorSave: function(evt) {
-      if (this._currentEditorDoneCallback && typeof this._currentEditorDoneCallback === 'function' && evt.detail && evt.detail.content) {
-        // Fire the event the converter will use to convert back to code
-        this.fire('px-code-editor-converter-convert-from-string', {
-          source: evt.detail.content,
-          done: function(err, strAsCode) {
-            this._currentEditorDoneCallback(null, strAsCode);
-            this.set('enabled', false);
-          }.bind(this)
-        });
-      }
-    },
-
-    /**
-     * When the user presses the escape key while the editor instance is enabled,
-     * try to hide the editor.
-     */
-    _handleEscKeypress: function() {
-      var status = this.get('enabled');
-      if (status) {
-        this.set('enabled', false);
-      }
-    }
-  });
+    function beautifyJavaScript(str) {
+      return js_beautify(str);
+    };
+  })();
 </script>

@@ -357,28 +357,17 @@ Creates inputs for configuration props.
      * Binds to a click on a code edit button.
      */
     _handleCodeEditButton: function(evt) {
-      const propName = evt.model.item.prop;
-      const prop = this.props[propName];
-      const propType = prop.type;
-      const propVal = prop.value;
-      const propFriendlyName = this._formatInputLabel(prop.inputLabel || propName);
-      const dataDebounce = evt.model.item.dataDebounce;
-      const inputType = evt.model.item.inputType;
-      const handleEditorDone = (err, newContent) => {
-        if (newContent) {
-          this._syncToProp(propName, newContent, dataDebounce)
-        }
-      };
+      const {prop, type, value, inputType, inputLabel} = evt.model.item;
+      const label = this._formatInputLabel(inputLabel || prop);
 
-      if (propVal) {
-        this.fire('px-demo-props-code-edit-request', {
-          code: propVal,
-          expectedReturnType: propType,
-          editorType: inputType,
-          editorTitle: "Property Editor: " + propFriendlyName,
-          done: handleEditorDone
-        });
-      }
+      this.fire('px-demo-props-code-edit-request', {
+        value: value,
+        mode: inputType,
+        title: `Property Editor: ${label}`,
+        save: (newValue) => {
+          this._syncToProp(prop, newValue);
+        }
+      });
     },
 
     /**
