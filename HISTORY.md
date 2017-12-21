@@ -1,3 +1,7 @@
+v3.0.16
+==========================
+* Use Github tag for latest version shields.io image
+
 v3.0.15
 ==========================
 * remove unused scss/css file.
