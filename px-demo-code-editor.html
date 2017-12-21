@@ -130,7 +130,7 @@ used to edit complex props.
         if (this._editorSaveCallback && this._codeType) {
           let parsedCode = '';
           if (this._codeType === 'code:JSON')  {
-            parsedCode = parseStringToJavaScript(this.$.editor.value);
+            parsedCode = parseStringToJSON(this.$.editor.value);
           }
           if (this._codeType === 'code:EvaluatedJavaScript') {
             parsedCode = dangerousEvalToJavaScript(this.$.editor.value);
@@ -150,6 +150,19 @@ used to edit complex props.
         this.enabled = false;
       }
     });
+
+    function parseStringToJSON(str) {
+      let parsed;
+      // First, try a JSON.parse()
+      try {
+        parsed = JSON.parse(str);
+      }
+      // Fall back to eval
+      catch (err) {
+        parsed = eval(str);
+      }
+      return parsed || '';
+    };
 
     function beautifyJavaScript(str) {
       return js_beautify(str);
