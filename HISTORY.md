@@ -1,3 +1,7 @@
+v3.0.14
+==========================
+* Re-add function to parse plain old JSON to string
+
 v3.0.13
 ==========================
 * Add EvaluatedJavaScript code editor for demo props
