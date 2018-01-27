@@ -1,3 +1,7 @@
+v3.0.18
+==========================
+* Added setProperties option to demo-configs
+
 v3.0.17
 ==========================
 * Bump to use new px-demo-design with container size fix, re-build sass

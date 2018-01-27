@@ -199,22 +199,48 @@ configurable options.
             this.applyPropDefaults(true);
           };
 
-          var propsToSet = Object.keys(newConfig);
-          for (var i = 0; i < propsToSet.length; i++) {
-            var propName = propsToSet[i];
-            if (propName === 'configName' || propName === 'configReset') continue;
-
-            var pathToVal = 'props.' + propsToSet[i] + '.value';
-            var oldVal = this.get(pathToVal);
-            var newVal = newConfig[propName];
-
-            if ((typeof oldVal !== 'undefined') && oldVal !== newVal) {
-              this.set(pathToVal, newVal);
-            }
+          // if we are in Polymer 2, do a batch update!
+          if(this.setProperties) {
+            this._setBatch(newConfig);
+          } else {
+            this._setIndividually(newConfig);
           }
 
           this._updatingProps = false;
         }, 10);
+      }
+    },
+
+    _setBatch: function(newConfig) {
+      var propsToSet = Object.keys(newConfig),
+          props = {};
+      for (var i = 0; i < propsToSet.length; i++) {
+        var propName = propsToSet[i];
+        if (propName === 'configName' || propName === 'configReset') continue;
+
+        var pathToVal = 'props.' + propsToSet[i] + '.value';
+        var newVal = newConfig[propName];
+
+        props[pathToVal] = newVal;
+
+      }
+
+      this.setProperties(props);
+    },
+
+    _setIndividually: function(newConfig) {
+      var propsToSet = Object.keys(newConfig);
+      for (var i = 0; i < propsToSet.length; i++) {
+        var propName = propsToSet[i];
+        if (propName === 'configName' || propName === 'configReset') continue;
+
+        var pathToVal = 'props.' + propsToSet[i] + '.value';
+        var oldVal = this.get(pathToVal);
+        var newVal = newConfig[propName];
+
+        if ((typeof oldVal !== 'undefined') && oldVal !== newVal) {
+          this.set(pathToVal, newVal);
+        }
       }
     },
 
