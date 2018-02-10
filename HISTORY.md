@@ -1,3 +1,7 @@
+v3.0.19
+==========================
+* Add demo helper css, for use when styling demo page buttons/forms etc.
+
 v3.0.18
 ==========================
 * Added setProperties option to demo-configs
