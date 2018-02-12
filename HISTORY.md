@@ -1,6 +1,10 @@
+v3.0.22
+==========================
+* reduce icon-set imports
+
 v3.0.21
 ==========================
-* Rebuild CSS and check it in from v3.0.19
+* add box sizing to helpers
 
 v3.0.20
 ==========================
