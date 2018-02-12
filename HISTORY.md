@@ -1,3 +1,7 @@
+v3.0.23
+==========================
+* Rebuild CSS and check it in from v3.0.19
+
 v3.0.22
 ==========================
 * reduce icon-set imports
