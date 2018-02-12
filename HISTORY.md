@@ -1,3 +1,7 @@
+v3.0.22
+==========================
+* reduce icon-set imports
+
 v3.0.21
 ==========================
 * add box sizing to helpers
