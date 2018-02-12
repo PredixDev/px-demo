@@ -1,3 +1,7 @@
+v3.0.21
+==========================
+* add box sizing to helpers
+
 v3.0.20
 ==========================
 * Add centre layout class
