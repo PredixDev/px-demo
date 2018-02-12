@@ -1,3 +1,7 @@
+v3.0.20
+==========================
+* Add centre layout class
+
 v3.0.19
 ==========================
 * Add demo helper css, for use when styling demo page buttons/forms etc.

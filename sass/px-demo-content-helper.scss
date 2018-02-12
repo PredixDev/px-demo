@@ -18,6 +18,15 @@ $inuit-enable-input--regular : true;
 $inuit-enable-validation-states : true;
 @import "px-forms-design/_base.forms.scss";
 
+// Objects
 $inuit-enable-btn--small : true;
 $inuit-enable-btn--tertiary : true;
 @import 'px-buttons-design/_objects.buttons.scss';
+
+// _component
+
+.demo-layout--center {
+  width: 80%;
+  margin: 0 auto;
+  max-width: calculateRem(1200px);
+}
