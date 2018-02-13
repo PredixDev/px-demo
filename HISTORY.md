@@ -1,3 +1,7 @@
+v3.0.24
+==========================
+* Add spacing and headers to demo helpers CSS.
+
 v3.0.23
 ==========================
 * Rebuild CSS and check it in from v3.0.19

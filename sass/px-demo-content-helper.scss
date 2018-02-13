@@ -11,13 +11,15 @@
 // Settings
 
 // Generic
-@import "px-normalize-design/_generic.normalize-mini.scss";
+@import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
 // Base
 $inuit-enable-input--regular : true;
 $inuit-enable-validation-states : true;
 @import "px-forms-design/_base.forms.scss";
+@import "px-headings-design/_base.headings.scss";
+@import "px-code-design/_base.code.scss";
 
 // Objects
 $inuit-enable-btn--small : true;
@@ -31,3 +33,17 @@ $inuit-enable-btn--tertiary : true;
   margin: 0 auto;
   max-width: calculateRem(1200px);
 }
+
+// Trumps
+$inuit-enable-margins : true;
+$inuit-enable-margins--tiny : true;
+$inuit-enable-margins--small : true;
+$inuit-enable-margins--large : true;
+$inuit-enable-margins--huge : true;
+$inuit-enable-margins--none : true;
+$inuit-enable-paddings : true;
+$inuit-enable-paddings--tiny : true;
+$inuit-enable-paddings--small : true;
+$inuit-enable-paddings--large : true;
+$inuit-enable-paddings--huge : true;
+@import "px-spacing-design/_trumps.spacing.scss";
