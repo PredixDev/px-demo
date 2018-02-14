@@ -1,3 +1,7 @@
+v3.0.25
+==========================
+* Add in px-demo-design to content-helper CSS.
+
 v3.0.24
 ==========================
 * Add spacing and headers to demo helpers CSS.

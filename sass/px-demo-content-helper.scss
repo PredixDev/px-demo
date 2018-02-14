@@ -27,6 +27,7 @@ $inuit-enable-btn--tertiary : true;
 @import 'px-buttons-design/_objects.buttons.scss';
 
 // _component
+@import "px-demo-design/_component.demo.scss";
 
 .demo-layout--center {
   width: 80%;
