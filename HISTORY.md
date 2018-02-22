@@ -1,4 +1,7 @@
-v3.0.25
+v3.0.26
+==========================
+* Removed px-overlay from bower
+
 ==========================
 * Add in px-demo-design to content-helper CSS.
 
