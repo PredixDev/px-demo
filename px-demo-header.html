@@ -41,9 +41,9 @@ Creates a header for Predix UI demo pages.
             </div>
             <template is="dom-if" if="{{!hideShields}}">
               <div class="flex u-mb demo-header__shield-badge-container">
-                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName,'Travis')}}" alt="Travis Status" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
-                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName,'Bower')}}" alt="Bower Version" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
-                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName,'GitHub')}}" alt="GitHub Issues Count" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
+                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName, githubOrg, 'Travis')}}" alt="Travis Status" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
+                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName, githubOrg, 'Bower')}}" alt="Bower Version" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
+                <img class="demo-header__badge-container__badge u-mr--" src="{{_getShieldUrl(_shieldName, githubOrg, 'GitHub')}}" alt="GitHub Issues Count" onerror="this.style.display='none'" on-load="_shieldImgLoaded"/>
               </div>
             </template>
             <div class="flex flex--row">
@@ -79,7 +79,7 @@ Creates a header for Predix UI demo pages.
               </div>
             </div>
           </div>
-          <a class="actionable u-mt+" href="https://github.com/PredixDev/{{_shieldName}}" target="_blank" rel="noopener">
+          <a class="actionable u-mt+" href="https://github.com/[[githubOrg]]/{{_shieldName}}" target="_blank" rel="noopener">
             <px-icon class="menu__open u-mr--" icon="px-nav:new-window"></px-icon>View on Github
           </a>
         </div>
@@ -180,6 +180,14 @@ Creates a header for Predix UI demo pages.
       mobile: {
         type: Boolean,
         value: false
+      },
+      /**
+       * Name of the Github organization this repo is hosted on. Defaults to
+       * 'predixdev'.
+       */
+      githubOrg: {
+        type: String,
+        value: 'PredixDev'
       }
     },
 
@@ -197,16 +205,16 @@ Creates a header for Predix UI demo pages.
         return (parentName.length) ? parentName : moduleName;
       }
     },
-    _getShieldUrl: function (shield, service) {
+    _getShieldUrl: function (shield, org, service) {
       if (typeof shield === 'string') {
         if (service === 'Travis') {
-          return 'https://img.shields.io/travis/PredixDev/' + shield + '/master.svg?style=flat-square';
+          return 'https://img.shields.io/travis/' + org + '/' + shield + '/master.svg?style=flat-square';
         }
         else if (service === 'Bower') {
-          return 'https://img.shields.io/github/tag/predixdev/' + shield + '.svg?style=flat-square&label=bower';
+          return 'https://img.shields.io/github/tag/' + org + '/' + shield + '.svg?style=flat-square&label=bower';
         }
         else if (service === 'GitHub') {
-          return 'https://img.shields.io/github/issues-raw/PredixDev/' + shield + '.svg?style=flat-square';
+          return 'https://img.shields.io/github/issues-raw/' + org + '/' + shield + '.svg?style=flat-square';
         }
       }
     },
