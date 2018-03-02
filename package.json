@@ -2,7 +2,7 @@
     "name": "px-demo",
     "author": "General Electric",
     "description": "A Predix UI Demo Component",
-    "version": "3.0.26",
+    "version": "3.1.0",
     "private": false,
     "extName" : null,
     "repository" :

@@ -1,3 +1,7 @@
+v3.1.0
+==========================
+* Add property to configure Github org in px-demo-header
+
 v3.0.26
 ==========================
 * Removed px-overlay from bower
