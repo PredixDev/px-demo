@@ -22,7 +22,9 @@ used to edit complex props.
     <style>
       .code-editor {
         width: 800px;
+        min-height: 150px;
         height: 500px;
+        max-height: calc(100vh - 300px); /* 120px is a magic number that cause the editor to fill the modal body but not overflow */
       }
       .code-editor-container {
         padding-bottom: 1rem;
