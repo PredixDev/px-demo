@@ -1,3 +1,7 @@
+v3.1.1
+==========================
+* Give min/max bounds for code editor height, fixes #18 and #10
+
 v3.1.0
 ==========================
 * Add property to configure Github org in px-demo-header
