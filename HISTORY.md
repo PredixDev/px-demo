@@ -1,3 +1,7 @@
+v3.1.2
+==========================
+* Give min/max bounds for code editor height, fixes #18 and #10
+
 v3.1.1
 ==========================
 * Give min/max bounds for code editor height, fixes #18 and #10

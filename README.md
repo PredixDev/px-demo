@@ -33,8 +33,6 @@ Second, import the component to your application with the following tag in your 
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/px-demo).
-
 The documentation in this repository is supplemental to the official Predix documentation, which is continuously updated and maintained by the Predix documentation team. Go to [http://predix.io](http://predix.io)  to see the official Predix documentation.
 
 
@@ -64,4 +62,4 @@ Navigate to the root of that server (e.g. http://localhost:8080/) in a browser t
 
 ## Known Issues
 
-Please use [Github Issues](https://github.com/PredixDev/px-demo/issues) to submit any bugs you might find.
+Please use [Github Issues](https://github.com/predixdesignsystem/px-demo/issues) to submit any bugs you might find.
