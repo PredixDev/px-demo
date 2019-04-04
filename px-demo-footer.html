@@ -47,11 +47,21 @@ Creates a footer for Predix UI demo pages.
           <a href="https://www.ge.com/digital"><img src="[[importPath]]monogram-wdmk.png" alt="GE Monogram" class=""></a>
         </div>
         <div class="demo-footer__list">
-          <ul class="list-inline list-inline--delimited">
-            <li><a href="https://predix.io/legal" class="actionable actionable--secondary" target="_blank">Legal</a></li>
-            <li><a href="https://www.predix.io/support/article/KB0012081" class="actionable actionable--secondary" target="_blank">Contact Us</a></li>
-            <li>Copyright &copy; General Electric Company. All rights reserved.</li>
-          </ul>
+          <template is="dom-if" if="{{_showCookiesLink}}">
+            <ul class="list-inline list-inline--delimited">
+              <li><a on-click="_openCookiesLink" class="actionable actionable--secondary">Cookies</a></li>
+              <li><a href="https://predix.io/legal" class="actionable actionable--secondary" target="_blank">Legal</a></li>
+              <li><a href="https://www.predix.io/support/article/KB0012081" class="actionable actionable--secondary" target="_blank">Contact Us</a></li>
+              <li>Copyright &copy; General Electric Company. All rights reserved.</li>
+            </ul>
+          </template>
+          <template is="dom-if" if="{{!_showCookiesLink}}">
+            <ul class="list-inline list-inline--delimited">
+              <li><a href="https://predix.io/legal" class="actionable actionable--secondary" target="_blank">Legal</a></li>
+              <li><a href="https://www.predix.io/support/article/KB0012081" class="actionable actionable--secondary" target="_blank">Contact Us</a></li>
+              <li>Copyright &copy; General Electric Company. All rights reserved.</li>
+            </ul>            
+          </template>
         </div>
       </div>
     </footer>
@@ -60,6 +70,35 @@ Creates a footer for Predix UI demo pages.
 
 <script>
   Polymer({
-    is: 'px-demo-footer'
+    is: 'px-demo-footer',
+
+    properties: {
+      /**
+       * Shows the cookies link, which opens up the Evidon config dialog to opt in/out of tracking cookies
+       *
+       * @property _showCookiesLink
+       * @type {Boolean}
+       * @default false
+       * @private
+       */
+      _showCookiesLink: {
+        type: Boolean,
+        value: false
+      }
+    },
+
+    ready: function() {
+      // Enable cookies link if global evidon object is present or if we're on www.predix-ui.com
+      if (window.location.hostname.indexOf('predix-ui.com') >= 0 || window.evidon)
+        this._showCookiesLink = true
+    },
+
+    _openCookiesLink: function() {
+      try {
+        window.evidon.notice.showConsentTool();
+      } catch(err) {
+        console.warn('Evidon notice tool is not available.', err)
+      }
+    }
   });
 </script>
