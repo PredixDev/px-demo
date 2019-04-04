@@ -1,3 +1,7 @@
+v3.1.3
+==========================
+* Footer now renders Cookies link on sites that use Evidon's GDPR-compliant cookies banner
+
 v3.1.2
 ==========================
 * Give min/max bounds for code editor height, fixes #18 and #10
