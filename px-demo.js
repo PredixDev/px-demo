@@ -1,4 +1,4 @@
-<!--
+/*
 Copyright (c) 2018, General Electric
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,22 +12,15 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
--->
-
-<!--
+*/
+/*
     Relative paths assume component is being run from inside an app or another component, where dependencies are flat
     siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
     'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
--->
-<link rel="import" href="../polymer/polymer.html"/>
-
-<!-- Import style module -->
-<link rel="import" href="css/px-demo-styles.html">
-
-<!-- Import sub-components -->
-<link rel="import" href="px-demo-header.html">
-
-<!--
+*/
+/* Import style module */
+/* Import sub-components */
+/**
 Partials, style modules and helpers for creating demo pages for Predix UI components.
 
 ### Usage
@@ -38,47 +31,53 @@ Partials, style modules and helpers for creating demo pages for Predix UI compon
 @blurb REPLACE THIS TEXT WITH A COMPONENT DESCRIPTION
 @homepage index.html
 @demo index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="px-demo">
-  <template>
-  </template>
-</dom-module>
+import './css/px-demo-styles.js';
+import './px-demo-header.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
 
-<script>
-  Polymer({
+`,
 
-    is: 'px-demo',
+  is: 'px-demo',
 
-    properties: {
-      /**
-      * This property keeps track of the number of clicks.
-      *
-      * @property counterValue
-      */
-      counterValue: {
-        type: Number,
-        value: 0,
-        notify: true
-      }
-    },
-
+  properties: {
     /**
-    * Handles click on the element defined in 'on-click' on the template.
+    * This property keeps track of the number of clicks.
     *
-    * @method handleClick
+    * @property counterValue
     */
-    handleClick: function(event, detail, sender) {
-      this.increment();
-    },
-
-    /**
-    * Increments the counter
-    *
-    * @method increment
-    */
-    increment: function() {
-      this.counterValue++;
+    counterValue: {
+      type: Number,
+      value: 0,
+      notify: true
     }
-  });
-</script>
+  },
+
+  /**
+  * Handles click on the element defined in 'on-click' on the template.
+  *
+  * @method handleClick
+  */
+  handleClick: function(event, detail, sender) {
+    this.increment();
+  },
+
+  /**
+  * Increments the counter
+  *
+  * @method increment
+  */
+  increment: function() {
+    this.counterValue++;
+  }
+});
