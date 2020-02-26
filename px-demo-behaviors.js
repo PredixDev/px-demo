@@ -57,3 +57,5 @@ PxDemoBehaviors.manageProps = [{
     }
   }
 }];
+
+export {PxDemoBehaviors};
